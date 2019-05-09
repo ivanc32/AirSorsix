@@ -13,21 +13,21 @@ data class Plane(
         @Id
         val id: String,
 
-        @Column(name = "model")
-        val model: String,
-
         @Column(name = "manufacturer")
         val manufacturer: String,
 
-        @Column(name = "rows_of_seats", nullable = false)
-        val seatsRows: Int,
+        @Column(name = "model")
+        val model: String,
 
-        @Column(name = "columns_of_seats", nullable = false)
-        val seatsColumns: Int,
+        @Column(name = "number_of_economy_seats", nullable = false)
+        val economySeats: Int,
 
-        @Column(name = "price", nullable = false)
-        val price: Int,
+        @Column(name = "number_of_business_seats", nullable = false)
+        val businessSeats: Int,
 
-        @Column(name = "first_class_rows") //how many of the starting rows are first class
-        val firstClassRows: Int
+        @Column(name = "price_of_economy_seat", nullable = false)
+        val economyPrice: Int,
+
+        @Column(name = "price_of_business_seat", nullable = false)
+        val businessPrice: Int
 )
