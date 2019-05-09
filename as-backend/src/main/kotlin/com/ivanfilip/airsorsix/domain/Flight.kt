@@ -11,6 +11,10 @@ data class Flight(
         @Id
         val id: String,
 
+        @ManyToOne
+        @JoinColumn(name = "plane_id", nullable = false)
+        val plane: Plane,
+
         @Column(name = "code", updatable = false, nullable = false)
         val code: String,
 
@@ -20,11 +24,17 @@ data class Flight(
         @Column(name = "dt_of_arrival", nullable = false)
         val arrivalDateTime: ZonedDateTime,
 
-        @OneToOne
-        @Column(name = "departure_location", nullable = false)
+        @ManyToOne
+        @JoinColumn(name = "departure_location_id", nullable = false)
         val departureLocation: Location,
 
-        @OneToOne
-        @Column(name = "arrival_location", nullable = false)
-        val arrivalLocation: Location
+        @ManyToOne
+        @JoinColumn(name = "arrival_location_id", nullable = false)
+        val arrivalLocation: Location,
+
+        @Column(name = "free_business_seats")
+        val businessSeats: Int = plane.businessSeats,
+
+        @Column(name = "free_economy_seats")
+        val economySeats: Int = plane.economySeats
         )
