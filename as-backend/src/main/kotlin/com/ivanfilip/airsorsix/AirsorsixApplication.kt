@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class AirsorsixApplication
 
 fun main(args: Array<String>) {
-	runApplication<AirsorsixApplication>(*args)
+    runApplication<AirsorsixApplication>(*args)
 }
