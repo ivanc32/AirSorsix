@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/home")
-class FlightController(val flightService: FlightService){
+class ApiPublicController(val flightService: FlightService){
 
 
     @GetMapping("/origins")

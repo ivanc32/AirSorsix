@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository
 interface LocationRepository : JpaRepository<Location, String> {
 
     fun findLocationByAirport(airport: String): Location?
+
+    fun findLocationById(id: String): Location?
 }

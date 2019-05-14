@@ -18,9 +18,9 @@ class LocationService(val repository: LocationRepository) {
 
     @Transactional
     fun addNewLocation(city: String, country: String, airport: String, price: Int): Location {
-        val location = Location(generateId(), city, country, airport, price);
-        logger.info("Saving location [{}]", location);
+        val location = Location(generateId(), city, country, airport, price)
+        logger.info("Saving location [{}]", location)
         repository.save(location)
-        return location;
+        return location
     }
 }
