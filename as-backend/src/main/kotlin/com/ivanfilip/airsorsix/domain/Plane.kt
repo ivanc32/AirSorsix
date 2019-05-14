@@ -20,10 +20,10 @@ data class Plane(
         val model: String,
 
         @Column(name = "number_of_economy_seats", nullable = false)
-        val economySeats: Int,
+        val economySeats: Int?,
 
         @Column(name = "number_of_business_seats", nullable = false)
-        val businessSeats: Int,
+        val businessSeats: Int?,
 
         @Column(name = "price_of_economy_seat", nullable = false)
         val economyPrice: Int,

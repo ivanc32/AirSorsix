@@ -35,8 +35,8 @@ data class Flight(
         val arrivalLocation: Location,
 
         @Column(name = "free_business_seats")
-        val businessSeats: Int = plane.businessSeats,
+        val businessSeats: Int? = plane.businessSeats,
 
         @Column(name = "free_economy_seats")
-        val economySeats: Int = plane.economySeats
+        val economySeats: Int? = plane.economySeats
         )
