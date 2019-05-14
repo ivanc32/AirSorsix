@@ -21,10 +21,10 @@ data class Flight(
         val code: String,
 
         @Column(name = "dt_of_departure", nullable = false)
-        val departureDateTime: ZonedDateTime,
+        val departureDateTime: LocalDateTime,
 
         @Column(name = "dt_of_arrival", nullable = false)
-        val arrivalDateTime: ZonedDateTime,
+        val arrivalDateTime: LocalDateTime,
 
         @ManyToOne
         @JoinColumn(name = "departure_location_id", nullable = false)
@@ -35,8 +35,8 @@ data class Flight(
         val arrivalLocation: Location,
 
         @Column(name = "free_business_seats")
-        val businessSeats: Int = plane.businessSeats,
+        val businessSeats: Int? = plane.businessSeats,
 
         @Column(name = "free_economy_seats")
-        val economySeats: Int = plane.economySeats
+        val economySeats: Int? = plane.economySeats
         )

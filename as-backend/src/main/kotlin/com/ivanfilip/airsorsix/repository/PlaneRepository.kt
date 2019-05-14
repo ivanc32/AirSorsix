@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface PlaneRepository : JpaRepository<Plane, String>{
+    fun findPlaneById(Id: String): Plane?
 }

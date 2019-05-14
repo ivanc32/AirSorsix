@@ -6,6 +6,8 @@ import com.ivanfilip.airsorsix.domain.Plane
 import com.ivanfilip.airsorsix.service.FlightService
 import com.ivanfilip.airsorsix.service.LocationService
 import com.ivanfilip.airsorsix.service.PlaneService
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -30,7 +32,10 @@ class ApiController(val flightService: FlightService,
     }
 
     @PostMapping("/create/flight")
-    fun createPoll(@RequestBody flight: CreateFlightRequest): Flight {
-        return flightService.addNewLocation(location.city, location.country, location.airport, location.price)
+    fun createFlight(@RequestBody flight: CreateFlightRequest): ResponseEntity<Flight> {
+        return flightService.addNewFlight(flight.planeId, flight.code, flight.departureDateTime,
+                flight.arrivalDateTime, flight.departureLocationId, flight.arrivalLocationId,
+                flight.businessSeats, flight.economySeats).map { ResponseEntity.ok(it) }
+                .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build())
     }
 }
