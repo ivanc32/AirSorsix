@@ -4,13 +4,17 @@ import com.ivanfilip.airsorsix.domain.Flight
 import com.ivanfilip.airsorsix.domain.Location
 import com.ivanfilip.airsorsix.repository.FlightRepository
 import com.ivanfilip.airsorsix.repository.LocationRepository
-import org.slf4j.LoggerFactory
+import com.ivanfilip.airsorsix.utills.generateId
+import com.ivanfilip.airsorsix.utills.loggerFor
 import org.springframework.stereotype.Service
-import java.util.logging.Logger
+import java.time.LocalDateTime
+import javax.transaction.Transactional
 
 @Service
 class FlightService(val flightRepository: FlightRepository,
                     val locationRepository: LocationRepository) {
+
+    val logger = loggerFor<FlightService>()
 
     fun getDepartureLocations(): List<Location>?{
         return flightRepository.findAllDistinctDepartureLocations()
@@ -23,5 +27,16 @@ class FlightService(val flightRepository: FlightRepository,
     fun getFlightsByLocation(origin: String, destination: String): List<Flight>?{
         return flightRepository
                 .findAllByDepartureLocationAndArrivalLocation(locationRepository.findLocationByAirport(origin), locationRepository.findLocationByAirport(destination))
+    }
+
+    @Transactional
+    fun addNewFlight(planeId: String, code: String, departureDateTime: LocalDateTime,
+                     arrivalDateTime: LocalDateTime, departureLocationId: String,
+                     arrivalLocationId: String, businessSeats: Int,
+                     economySeats: Int): Flight {
+        val flight = Flight(generateId(), planeId, code, )
+        logger.info("Saving flight [{}]", flight)
+        flightRepository.save(flight)
+        return flight
     }
 }
