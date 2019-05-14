@@ -1,9 +1,11 @@
 package com.ivanfilip.airsorsix.domain;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import javax.persistence.*
 
+@EnableAutoConfiguration
 @Entity
 @Table(name = "flights")
 data class Flight(
