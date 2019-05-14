@@ -1,9 +1,11 @@
 package com.ivanfilip.airsorsix.domain;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import javax.persistence.*
 
+@EnableAutoConfiguration
 @Entity
 @Table(name = "flights")
 data class Flight(
@@ -33,8 +35,8 @@ data class Flight(
         val arrivalLocation: Location,
 
         @Column(name = "free_business_seats")
-        val businessSeats: Int = plane.businessSeats,
+        val businessSeats: Int? = plane.businessSeats,
 
         @Column(name = "free_economy_seats")
-        val economySeats: Int = plane.economySeats
+        val economySeats: Int? = plane.economySeats
         )
