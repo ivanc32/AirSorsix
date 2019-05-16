@@ -1,8 +1,6 @@
 package com.ivanfilip.airsorsix.api
 
 import org.springframework.format.annotation.DateTimeFormat
-import java.time.LocalDateTime
-import javax.validation.constraints.Min
 import javax.validation.constraints.NotNull
 
 class CreateFlightRequest (
@@ -14,23 +12,15 @@ class CreateFlightRequest (
 
         @NotNull
         @DateTimeFormat
-        val departureDateTime: LocalDateTime,
+        val departureDateTime: String,
 
         @NotNull
         @DateTimeFormat
-        val arrivalDateTime: LocalDateTime,
+        val arrivalDateTime: String,
 
         @NotNull
         val departureLocationId: String,
 
         @NotNull
-        val arrivalLocationId: String,
-
-        @NotNull
-        @Min(1)
-        val businessSeats: Int,
-
-        @NotNull
-        @Min(1)
-        val economySeats: Int
+        val arrivalLocationId: String
 )

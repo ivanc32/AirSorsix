@@ -1,7 +1,8 @@
 package com.ivanfilip.airsorsix.domain
 
 import com.ivanfilip.airsorsix.custom_types.SeatType
-import java.time.ZonedDateTime
+import org.hibernate.annotations.GenericGenerator
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -9,7 +10,9 @@ import javax.persistence.*
 data class Reservation(
         @Column(name = "id", unique = true, updatable = false, nullable = false)
         @Id
-        val id: String,
+        @GeneratedValue(generator = "uuid")
+        @GenericGenerator(name = "uuid", strategy = "uuid2")
+        val id: String = "",
 
         @ManyToOne
         @JoinColumn(name = "flight_id")
@@ -23,5 +26,5 @@ data class Reservation(
         val seatType: SeatType,
 
         @Column(name = "date_reserved", nullable = false)
-        val dateReserved: ZonedDateTime = ZonedDateTime.now()
+        val dateReserved: LocalDateTime = LocalDateTime.now()
 )

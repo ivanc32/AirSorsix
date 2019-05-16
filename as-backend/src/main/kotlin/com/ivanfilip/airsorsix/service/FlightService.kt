@@ -1,15 +1,17 @@
 package com.ivanfilip.airsorsix.service
+
 import com.ivanfilip.airsorsix.domain.Flight
 import com.ivanfilip.airsorsix.domain.Location
 import com.ivanfilip.airsorsix.repository.FlightRepository
 import com.ivanfilip.airsorsix.repository.LocationRepository
 import com.ivanfilip.airsorsix.repository.PlaneRepository
-import com.ivanfilip.airsorsix.utills.generateId
 import com.ivanfilip.airsorsix.utills.loggerFor
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
-import java.util.*
 import javax.transaction.Transactional
+import java.time.format.DateTimeFormatter
+
+
 
 @Service
 class FlightService(val flightRepository: FlightRepository,
@@ -22,7 +24,7 @@ class FlightService(val flightRepository: FlightRepository,
         return flightRepository.findAllDistinctDepartureLocations()
     }
 
-    fun getArrivalLocations(origin: String): List<Location>?{
+    fun getArrivalLocations(origin: String): List<Location>?{ //cannot be nullable because every departure must have an arrival location
         return flightRepository.findAllDistinctArrivalLocations(locationRepository.findLocationByAirport(origin))
     }
 
@@ -33,17 +35,17 @@ class FlightService(val flightRepository: FlightRepository,
     }
 
     @Transactional
-    fun addNewFlight(planeId: String, code: String, departureDateTime: LocalDateTime,
-                     arrivalDateTime: LocalDateTime, departureLocationId: String,
-                     arrivalLocationId: String, businessSeats: Int,
-                     economySeats: Int): Optional<Flight> {
-        val flight = Flight(generateId(), planeRepository.findPlaneById(planeId) ?: return Optional.empty(),
-                code, departureDateTime, arrivalDateTime,
-                locationRepository.findLocationById(departureLocationId) ?: return Optional.empty(),
-                locationRepository.findLocationById(arrivalLocationId) ?: return Optional.empty(),
-                businessSeats, economySeats)
+    fun addNewFlight(planeId: String, code: String, departureDateTime: String,
+                     arrivalDateTime: String, departureLocationId: String,
+                     arrivalLocationId: String): Flight? {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+        val flight = Flight(plane = planeRepository.findPlaneById(planeId) ?: return null,
+                code = code, departureDateTime = LocalDateTime.parse(departureDateTime, formatter),
+                arrivalDateTime = LocalDateTime.parse(arrivalDateTime, formatter),
+                departureLocation = locationRepository.findLocationById(departureLocationId) ?: return null,
+                arrivalLocation = locationRepository.findLocationById(arrivalLocationId) ?: return null)
         logger.info("Saving flight [{}]", flight)
         flightRepository.save(flight)
-        return Optional.of(flight)
+        return flight
     }
 }

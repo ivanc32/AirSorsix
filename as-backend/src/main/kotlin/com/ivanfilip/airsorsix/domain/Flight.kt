@@ -1,17 +1,19 @@
-package com.ivanfilip.airsorsix.domain;
+package com.ivanfilip.airsorsix.domain
 
+import org.hibernate.annotations.GenericGenerator
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import java.time.LocalDateTime
-import java.time.ZonedDateTime
 import javax.persistence.*
 
 @EnableAutoConfiguration
 @Entity
 @Table(name = "flights")
 data class Flight(
-        @Column(name = "id", unique = true, updatable = false, nullable = false)
         @Id
-        val id: String,
+        @GeneratedValue(generator = "uuid")
+        @GenericGenerator(name = "uuid", strategy = "uuid2")
+        @Column(name = "id", unique = true, updatable = false, nullable = false)
+        val id: String = "",
 
         @ManyToOne
         @JoinColumn(name = "plane_id", nullable = false)
