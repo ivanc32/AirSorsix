@@ -1,17 +1,16 @@
 package com.ivanfilip.airsorsix.domain
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
-
+import org.hibernate.annotations.GenericGenerator
+import javax.persistence.*
 
 @Entity
 @Table(name = "planes")
 data class Plane(
-        @Column(name = "id", unique = true, updatable = false, nullable = false)
         @Id
-        val id: String,
+        @GeneratedValue(generator = "uuid")
+        @GenericGenerator(name = "uuid", strategy = "uuid2")
+        @Column(name = "id", unique = true, updatable = false, nullable = false)
+        val id: String = "",
 
         @Column(name = "manufacturer")
         val manufacturer: String,

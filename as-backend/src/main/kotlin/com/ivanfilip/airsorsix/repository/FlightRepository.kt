@@ -16,4 +16,6 @@ interface FlightRepository : JpaRepository<Flight, String>{
     fun findAllDistinctArrivalLocations(@Param("origin") origin: Location?): List<Location>?
 
     fun findAllByDepartureLocationAndArrivalLocation(origin: Location?, destination: Location?): List<Flight>?
+
+    fun findFlightById(id: String): Flight?
 }

@@ -9,3 +9,4 @@ class AirsorsixApplication
 fun main(args: Array<String>) {
     runApplication<AirsorsixApplication>(*args)
 }
+
