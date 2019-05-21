@@ -20,12 +20,15 @@ class FlightService(val flightRepository: FlightRepository,
 
     val logger = loggerFor<FlightService>()
 
-    fun getDepartureLocations(): List<Location>?{
-        return flightRepository.findAllDistinctDepartureLocations()
+    fun getDepartureLocations(origin: String? = ""): List<Location>?{
+        val locations: List<Location>? = flightRepository.findAllDistinctDepartureLocations()
+        return locations?.filter { it.city.startsWith(origin ?: return locations, ignoreCase = true) }
     }
 
-    fun getArrivalLocations(origin: String): List<Location>?{ //cannot be nullable because every departure must have an arrival location
-        return flightRepository.findAllDistinctArrivalLocations(locationRepository.findLocationByAirport(origin))
+
+    fun getArrivalLocations(origin: String, destination: String?): List<Location>?{
+        val locations: List<Location>? = flightRepository.findAllDistinctArrivalLocations(locationRepository.findLocationByAirport(origin))
+        return locations?.filter { it.city.startsWith(destination ?: return locations, ignoreCase = true) }
     }
 
     fun getFlightsByLocation(origin: String, destination: String): List<Flight>?{

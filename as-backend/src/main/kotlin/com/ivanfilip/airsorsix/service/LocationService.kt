@@ -11,6 +11,10 @@ class LocationService(val repository: LocationRepository) {
 
     val logger = loggerFor<LocationService>()
 
+    fun getLocationByAirport(airport: String): Location? {
+        return repository.findLocationByAirport(airport)
+    }
+
     @Transactional
     fun addNewLocation(city: String, country: String, airport: String, price: Int): Location {
         val location = Location(city = city, country = country,
