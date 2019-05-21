@@ -2,21 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Flight } from 'src/model/Flight';
+import { HttpHeaders } from '@angular/common/http';
+import { Plane } from 'src/model/Plane';
 
 const api = 'http://localhost:8080/api';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class FlightService {
+export class PlaneService {
+
 
   constructor(private http: HttpClient) { }
 
-  getObject<T>(url: string): Observable<T> {
-    return this.http.get<T>(url)
+  getObject<T>(url: string): Observable<T[]> {
+    return this.http.get<T[]>(url)
       .pipe(
-        catchError(this.handleError(null))
+        catchError(this.handleError([]))
       );
   }
 
@@ -34,15 +37,7 @@ export class FlightService {
     };
   }
 
-  postFlight(flight: Flight) {
-    return this.postObject<Flight>(`${api}/create/flight`, flight);
-  }
-
-  getFlightById(id: string): Observable<Flight> {
-    return this.getObject<Flight>(`${api}/flights/${id}`);
-  }
-
-  getFlights(depAirport: string, arrAirport: string): Observable<Flight[]> {
-    return this.http.get<Flight[]>(`${api}/flights/${depAirport}/${arrAirport}`);
+  postPlane(plane: Plane) {
+    return this.postObject<Plane>(`${api}/create/plane`, plane);
   }
 }

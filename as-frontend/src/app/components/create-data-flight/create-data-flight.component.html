@@ -1,0 +1,56 @@
+<h2>Flight Creation form</h2>
+
+<form [formGroup]="createFlightForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>
+          Plane
+        <input type="text" formControlName="plane" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Code
+        <input type="text" formControlName="code" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Departure Time and Date
+        <input type="text" formControlName="departureDateTime" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Arrival Time and Date
+        <input type="text" formControlName="arrivalDateTime" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Departure Location
+        <input type="text" formControlName="departureLocation" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Arrival Location
+        <input type="text" formControlName="arrivalLocation" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+      <label>
+        Business Seats
+      <input type="text" formControlName="businessSeats" class="form-control"/>
+    </label>
+  </div>
+  <div class="form-group">
+      <label>
+        Economy Seats
+      <input type="text" formControlName="economySeats" class="form-control"/>
+    </label>
+  </div>
+    <div class="form-group">
+      <button type="submit" [disabled]="!createFlightForm.valid">Submit</button>
+    </div>
+
+  </form>

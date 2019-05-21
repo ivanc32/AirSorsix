@@ -1,10 +1,10 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '../../domain/Location';
 import {LocationService} from '../../service/location.service';
 import {FlightService} from '../../service/flight.service';
-import {Flight} from '../../domain/Flight';
 import {forkJoin, Observable} from 'rxjs';
+import { Flight } from 'src/model/Flight';
+import { Location } from 'src/model/Location';
 
 @Component({
   selector: 'app-search-details',

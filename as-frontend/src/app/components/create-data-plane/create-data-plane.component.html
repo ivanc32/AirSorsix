@@ -1,0 +1,43 @@
+<h2>Plane Creation form</h2>
+
+<form [formGroup]="createPlaneForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>
+          Manufacturer
+        <input type="text" formControlName="manufacturer" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Model
+        <input type="text" formControlName="model" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Number Of Economy Seats
+        <input type="text" formControlName="numberOfEconomySeats" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Price Of Economy Seats
+        <input type="text" formControlName="priceOfEconomySeat" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Number Of Business Seats
+        <input type="text" formControlName="numberOfBusinessSeats" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Price Of Business Seats
+        <input type="text" formControlName="priceOfBusinessSeat" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <button type="submit" [disabled]="!createPlaneForm.valid">Submit</button>
+    </div>
+  </form>

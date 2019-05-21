@@ -1,9 +1,8 @@
 export interface Plane {
-  id: string;
-  manufacturer: string;
   model: string;
+  manufacturer: string;
   economySeats: number;
+  priceOfEconomySeat: number;
   businessSeats: number;
-  economyPrice: number;
-  businessPrice: number;
+  priceOfBusinessSeat: number;
 }

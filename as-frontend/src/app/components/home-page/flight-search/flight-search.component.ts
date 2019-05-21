@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {distinctUntilChanged, switchMap} from 'rxjs/operators';
-import {Location} from '../../../domain/Location';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LocationService} from '../../../service/location.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgbDate, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {FlightService} from '../../../service/flight.service';
-import {Flight} from '../../../domain/Flight';
+import { Flight } from 'src/model/Flight';
+import { Location } from 'src/model/Location';
 
 
 @Component({

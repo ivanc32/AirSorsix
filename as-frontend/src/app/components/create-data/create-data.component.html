@@ -1,0 +1,14 @@
+<h1>Data Creation Form</h1>
+
+<div>
+    <button><a class="dropdown-item" href="/api/logout">Logout</a></button>
+  <button label="Locaion" (click)="showComponent = 1">Locaton</button>
+  <button label="Plane" (click)="showComponent = 2">Plane</button>
+  <button label="Flight" (click)="showComponent = 3">Flight</button>
+</div>
+
+<div *ngIf="showComponent">
+  <app-create-data-location *ngIf="showComponent == 1"></app-create-data-location>
+  <app-create-data-plane *ngIf="showComponent == 2"></app-create-data-plane>
+  <app-create-data-flight *ngIf="showComponent == 3"></app-create-data-flight>
+</div>

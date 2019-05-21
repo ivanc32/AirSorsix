@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Flight } from 'src/model/Flight';
+import { Reservation } from 'src/model/Reservation';
+
 
 const api = 'http://localhost:8080/api';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FlightService {
+export class ReservationService {
 
   constructor(private http: HttpClient) { }
 
@@ -34,15 +35,11 @@ export class FlightService {
     };
   }
 
-  postFlight(flight: Flight) {
-    return this.postObject<Flight>(`${api}/create/flight`, flight);
+  postReservation(reservation: Reservation) {
+    return this.postObject<Reservation>(`${api}/user/create/reservation`, reservation);
   }
 
-  getFlightById(id: string): Observable<Flight> {
-    return this.getObject<Flight>(`${api}/flights/${id}`);
-  }
-
-  getFlights(depAirport: string, arrAirport: string): Observable<Flight[]> {
-    return this.http.get<Flight[]>(`${api}/flights/${depAirport}/${arrAirport}`);
+  getReservationsByFlight(flightId: string): Observable<Reservation[]> {
+    return this.getObject<Reservation[]>(`${api}/reservations/${flightId}`);
   }
 }

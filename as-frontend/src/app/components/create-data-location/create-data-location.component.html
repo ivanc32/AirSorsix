@@ -1,0 +1,31 @@
+<h2>Plane Location form</h2>
+
+<form [formGroup]="createLocationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>
+          City
+        <input type="text" formControlName="city" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Country
+        <input type="text" formControlName="country" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Airport
+        <input type="text" formControlName="airport" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <label>
+          Price
+        <input type="text" formControlName="price" class="form-control"/>
+      </label>
+    </div>
+    <div class="form-group">
+        <button type="submit" [disabled]="!createLocationForm.valid">Submit</button>
+    </div>
+  </form>
