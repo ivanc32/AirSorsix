@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 import javax.validation.Valid
 
 @RestController
@@ -24,17 +26,17 @@ class ApiPublicController(val flightService: FlightService,
 
 
     @PostMapping("/flight")
-    fun createFlight(@RequestBody @Valid flight: CreateFlightRequest): ResponseEntity<List<Flight>> {
-        return flightService.addNewFlight(flight.planeId, flight.code, flight.departureDateTime,
+    fun createFlight(@RequestBody @Valid flight: CreateFlightRequest): ResponseEntity<List<Flight>> =
+            flightService.addNewFlight(flight.planeId, flight.code, flight.departureDateTime,
                 flight.arrivalDateTime, flight.departureLocationId, flight.arrivalLocationId)?.let {
             ResponseEntity.ok(it)
         } ?: ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
-    }
+
 
     @GetMapping("/origin/")
-    fun departureLocations(@RequestParam(value = "origin", required = false) origin: String?): List<Location>? {
-        return flightService.getDepartureLocations(origin)
-    }
+    fun departureLocations(@RequestParam(value = "origin", required = false) origin: String?): List<Location>? =
+            flightService.getDepartureLocations(origin)
+
 
     @GetMapping("/location/")
     fun locationByAirport(@RequestParam(value = "airport") airport: String): Location? {
@@ -43,25 +45,24 @@ class ApiPublicController(val flightService: FlightService,
 
     @GetMapping("/destinations/")
     fun destinationLocations(@RequestParam(value = "origin", required = true) origin: String,
-                             @RequestParam(value = "destination", required = false) destination: String?): List<Location>? {
-        return flightService.getArrivalLocations(origin, destination)
-    }
+                             @RequestParam(value = "destination", required = false) destination: String?): List<Location>? =
+            flightService.getArrivalLocations(origin, destination)
+
 
     @GetMapping("flights/{id}")
-    fun flightById(@PathVariable(name = "id") id: String): Flight? {
-        return flightService.getFlightById(id)
-    }
+    fun flightById(@PathVariable(name = "id") id: String): Flight? = flightService.getFlightById(id)
+
 
     @GetMapping("flights/{origin}/{destination}")
     fun flightsByPath(@PathVariable(name = "origin") origin: String,
-                      @PathVariable(name = "destination") destination: String): List<Flight>?{
-        return flightService.getFlightsByLocation(origin, destination)
-    }
+                      @PathVariable(name = "destination") destination: String): List<Flight>? =
+            flightService.getFlightsByLocation(origin, destination)
+
 
     @GetMapping("reservations/{flightId}")
-    fun reservationsByFlight(@PathVariable(name = "flightId") flightId: String): List<Reservation>? {
-        return reservationService.findReservationsByFlight(flightId)
-    }
+    fun reservationsByFlight(@PathVariable(name = "flightId") flightId: String): List<Reservation>? =
+            reservationService.findReservationsByFlight(flightId)
+
 
     @PostMapping("/register")
     fun createUser(@RequestBody @Valid user: CreateUserRequest): ResponseEntity<String> {
@@ -70,10 +71,9 @@ class ApiPublicController(val flightService: FlightService,
     }
 
     @GetMapping("/user")
-    fun user(principal: Principal): User {
-        return userService.getUserForPrincipal(principal)
-    }
+    fun user(principal: Principal): User = userService.getUserForPrincipal(principal)
 
-    /*@GetMapping("/login")
+
+    @GetMapping("/login")
     fun logIn(principal: Principal, response: HttpServletResponse, request: HttpServletRequest): Principal = principal
-*/}
+}
