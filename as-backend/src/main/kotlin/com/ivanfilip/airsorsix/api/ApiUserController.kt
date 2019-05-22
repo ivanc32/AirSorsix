@@ -13,12 +13,11 @@ import javax.validation.Valid
 class ApiUserController(val reservationService: ReservationService) {
 
     @PostMapping("/reservation")
-    fun addNewReservation(@RequestBody @Valid reservation: CreateReservationRequest): ResponseEntity<Reservation?> {
-        return reservationService.addNewReservation(
+    fun addNewReservation(@RequestBody @Valid reservation: CreateReservationRequest): ResponseEntity<Reservation?> =
+            reservationService.addNewReservation(
                 reservation.flightId, reservation.userId,
                 reservation.economyTickets, reservation.businessTickets)
                 ?.let {
                     ResponseEntity.ok(it)
                 } ?: ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
-    }
 }
