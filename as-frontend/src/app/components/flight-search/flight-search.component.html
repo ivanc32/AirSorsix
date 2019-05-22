@@ -1,21 +1,20 @@
 <div class="mt-5 pt-2">
   <div class="d-flex">
     <div class="col-6 bg-light p-2">
-      <form [formGroup]="flightSearchFormGroup" autocomplete="off" (ngSubmit)="onSubmit()">
+      <form [formGroup]="flightSearchFormGroup" autocomplete="off">
         <fieldset class="form-group">
           <label for="origin">Origin</label>
           <input type="text" class="form-control" formControlName="origin" id="origin" placeholder="origin" #originInput
-                 (input)="searchOrigin(originInput.value)" (click)="changeFlag(true, originInput.value)"
-                 (ngModelChange)="onOriginChange()">
+                 (click)="changeFlag(true, originInput.value)" (ngModelChange)="onOriginChange(originInput.value)">
         </fieldset>
         <fieldset class="form-group">
           <label for="destination">Destination</label>
           <input type="text" class="form-control" formControlName="destination" id="destination"
-                 placeholder="destination" #destinationInput (input)="searchDestination(destinationInput.value)"
-                 (click)="changeFlag(false, destinationInput.value)" (ngModelChange)="onDestinationChange()">
+                 placeholder="destination" #destinationInput (click)="changeFlag(false, destinationInput.value)"
+                 (ngModelChange)="onDestinationChange(destinationInput.value)">
         </fieldset>
 
-        <input id="myCheckbox" type="checkbox" class="custom-checkbox" [checked]="checked" [disabled]="checkbox"  (click)="twoWay = !twoWay; checked = !checked">
+        <input id="myCheckbox" type="checkbox" class="custom-checkbox" [checked]="checked"  (click)="twoWayClick()">
         <label for="myCheckbox">Two-way</label>
         <span></span>
 
@@ -33,7 +32,7 @@
           <button (click)="d.toggle()" class="btn-outline-primary ml-1">Return</button>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3">Search</button>
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="submitButton" (click)="onSubmit()">Search</button>
       </form>
     </div>
 
