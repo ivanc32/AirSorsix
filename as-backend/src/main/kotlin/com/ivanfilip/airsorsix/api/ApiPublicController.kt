@@ -18,6 +18,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("*")
 class ApiPublicController(val flightService: FlightService,
                           val userService: UserService,
                           val locationService: LocationService,

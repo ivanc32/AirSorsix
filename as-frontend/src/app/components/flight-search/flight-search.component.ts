@@ -36,8 +36,8 @@ export class FlightSearchComponent implements OnInit {
     dateFrom: new FormControl(''),
     dateTo: new FormControl('')
   });
-  isDisabled = (date: NgbDate, current: { month: number }) => !this.hasFlight(date, this.flights);
-  isDisabledTwoWay = (date: NgbDate, current: { month: number }) => !this.hasFlight(date, this.returnFlights) || !this.dateIsAfter(date, this.flightSearchFormGroup.get('dateFrom').value);
+  isDisabled = (date: NgbDate) => !this.hasFlight(date, this.flights);
+  isDisabledTwoWay = (date: NgbDate) => !this.hasFlight(date, this.returnFlights) || !this.dateIsAfter(date, this.flightSearchFormGroup.get('dateFrom').value);
 
 
   constructor(private locationService: LocationService, private activetedRoute: ActivatedRoute,
@@ -138,7 +138,6 @@ export class FlightSearchComponent implements OnInit {
       this.searchDestination(value);
     }
   }
-
 
   checkIfValid() {
     if (this.chosenDepLocation != null && this.chosenArrLocation != null) {
