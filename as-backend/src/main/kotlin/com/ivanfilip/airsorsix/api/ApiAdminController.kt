@@ -14,6 +14,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/create")
+@CrossOrigin("*")
 class ApiAdminController(val flightService: FlightService,
                          val locationService: LocationService,
                          val planeService: PlaneService) {
