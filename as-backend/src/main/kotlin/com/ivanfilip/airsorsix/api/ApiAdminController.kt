@@ -9,15 +9,12 @@ import com.ivanfilip.airsorsix.service.PlaneService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-@PreAuthorize("hasRole('ADMIN')")
 @RestController
-@RequestMapping("/api/admin/create")
+@RequestMapping("/api/create")
+@CrossOrigin("*")
 class ApiAdminController(val flightService: FlightService,
                          val locationService: LocationService,
                          val planeService: PlaneService) {
@@ -35,7 +32,7 @@ class ApiAdminController(val flightService: FlightService,
     }
 
     @PostMapping("/flight")
-    fun createFlight(@RequestBody @Valid flight: CreateFlightRequest): ResponseEntity<Flight?> {
+    fun createFlight(@RequestBody @Valid flight: CreateFlightRequest): ResponseEntity<List<Flight>?> {
         return flightService.addNewFlight(flight.planeId, flight.code, flight.departureDateTime,
                 flight.arrivalDateTime, flight.departureLocationId, flight.arrivalLocationId)?.let {
             ResponseEntity.ok(it)

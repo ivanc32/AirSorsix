@@ -1,6 +1,5 @@
 package com.ivanfilip.airsorsix.api
 
-import com.ivanfilip.airsorsix.custom_types.SeatType
 import javax.validation.constraints.NotNull
 
 class CreateReservationRequest (
@@ -11,5 +10,8 @@ class CreateReservationRequest (
         val userId: String,
 
         @NotNull
-        val seatType: SeatType
+        val economyTickets: Int,
+
+        @NotNull
+        val businessTickets: Int
 )

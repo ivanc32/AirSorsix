@@ -15,15 +15,18 @@ data class Reservation(
         val id: String = "",
 
         @ManyToOne
-        @JoinColumn(name = "flight_id")
+        @JoinColumn(name = "flight_id", nullable = false)
         val flight: Flight,
 
         @ManyToOne
-        @JoinColumn(name = "user_id")
+        @JoinColumn(name = "user_id", nullable = false)
         val user: User,
 
-        @Column(name = "seat_type", nullable = false)
-        val seatType: SeatType,
+        @Column(name = "number_of_economy_tickets", nullable = false)
+        val economyTickets: Int = 0,
+
+        @Column(name = "number_of_business_tickets", nullable = false)
+        val businessTickets: Int = 0,
 
         @Column(name = "date_reserved", nullable = false)
         val dateReserved: LocalDateTime = LocalDateTime.now()
