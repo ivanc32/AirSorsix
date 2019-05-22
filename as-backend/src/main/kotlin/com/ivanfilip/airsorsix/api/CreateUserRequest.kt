@@ -11,6 +11,5 @@ class CreateUserRequest (
         @Length(min = 7, max = 30)
         val password: String,
 
-        @NotNull
         val role: String = "USER"
 )

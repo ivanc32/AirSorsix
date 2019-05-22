@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class LocationService(val repository: LocationRepository) {
+class LocationService(val locationRepository: LocationRepository) {
 
     val logger = loggerFor<LocationService>()
 
     fun getLocationByAirport(airport: String): Location? {
-        return repository.findLocationByAirport(airport)
+        return locationRepository.findLocationByAirport(airport)
     }
 
     @Transactional
@@ -20,7 +20,7 @@ class LocationService(val repository: LocationRepository) {
         val location = Location(city = city, country = country,
                 airport = airport, price = price)
         logger.info("Saving location [{}]", location)
-        repository.save(location)
+        locationRepository.save(location)
         return location
     }
 }

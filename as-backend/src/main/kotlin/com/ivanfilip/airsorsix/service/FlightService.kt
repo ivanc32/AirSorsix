@@ -21,14 +21,19 @@ class FlightService(val flightRepository: FlightRepository,
     val logger = loggerFor<FlightService>()
 
     fun getDepartureLocations(origin: String? = ""): List<Location>?{
-        val locations: List<Location>? = flightRepository.findAllDistinctDepartureLocations()
-        return locations?.filter { it.city.startsWith(origin ?: return locations, ignoreCase = true) }
+        //val locations: List<Location>? = flightRepository.findAllDistinctDepartureLocations()
+        //return locations?.filter { it.city.startsWith(origin ?: return locations, ignoreCase = true) }
+        return flightRepository
+                .findAllDistinctDepartureLocations()
+                ?.filter { it.city.startsWith(origin ?: "", ignoreCase = true) }
     }
 
-
     fun getArrivalLocations(origin: String, destination: String?): List<Location>?{
-        val locations: List<Location>? = flightRepository.findAllDistinctArrivalLocations(locationRepository.findLocationByAirport(origin))
-        return locations?.filter { it.city.startsWith(destination ?: return locations, ignoreCase = true) }
+        /*val locations: List<Location>? = flightRepository.findAllDistinctArrivalLocations(locationRepository.findLocationByAirport(origin))
+        return locations?.filter { it.city.startsWith(destination ?: return locations, ignoreCase = true) }*/
+        return flightRepository
+                .findAllDistinctArrivalLocations(locationRepository.findLocationByAirport(origin))
+                ?.filter { it.city.startsWith(destination ?: "", ignoreCase = true) }
     }
 
     fun getFlightsByLocation(origin: String, destination: String): List<Flight>?{
@@ -37,18 +42,39 @@ class FlightService(val flightRepository: FlightRepository,
                         locationRepository.findLocationByAirport(destination))
     }
 
+    fun getFlightById(id: String): Flight? {
+        return flightRepository.findFlightById(id)
+    }
+
     @Transactional
     fun addNewFlight(planeId: String, code: String, departureDateTime: String,
                      arrivalDateTime: String, departureLocationId: String,
-                     arrivalLocationId: String): Flight? {
+                     arrivalLocationId: String): List<Flight>? {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-        val flight = Flight(plane = planeRepository.findPlaneById(planeId) ?: return null,
-                code = code, departureDateTime = LocalDateTime.parse(departureDateTime, formatter),
-                arrivalDateTime = LocalDateTime.parse(arrivalDateTime, formatter),
-                departureLocation = locationRepository.findLocationById(departureLocationId) ?: return null,
-                arrivalLocation = locationRepository.findLocationById(arrivalLocationId) ?: return null)
-        logger.info("Saving flight [{}]", flight)
-        flightRepository.save(flight)
-        return flight
+        val flights: MutableList<Flight> = mutableListOf()
+        for(i in 0..100) {
+            val flight = Flight(plane = planeRepository.findPlaneById(planeId) ?: return null,
+                    code = code,
+                    departureDateTime = LocalDateTime.parse(departureDateTime, formatter).plusWeeks(i.toLong()),
+                    arrivalDateTime = LocalDateTime.parse(arrivalDateTime, formatter).plusWeeks(i.toLong()),
+                    departureLocation = locationRepository.findLocationById(departureLocationId) ?: return null,
+                    arrivalLocation = locationRepository.findLocationById(arrivalLocationId) ?: return null)
+            flights.add(flight)
+            logger.info("Saving flight [{}]", flight)
+            flightRepository.save(flight)
+
+            val returnFlight = Flight(plane = planeRepository.findPlaneById(planeId) ?: return null,
+                    code = code,
+                    departureDateTime = LocalDateTime.parse(departureDateTime, formatter)
+                            .plusWeeks(i.toLong()).plusDays(1.toLong()),
+                    arrivalDateTime = LocalDateTime.parse(arrivalDateTime, formatter)
+                            .plusWeeks(i.toLong()).plusDays(1.toLong()),
+                    departureLocation = locationRepository.findLocationById(arrivalLocationId) ?: return null,
+                    arrivalLocation = locationRepository.findLocationById(departureLocationId) ?: return null)
+            flights.add(returnFlight)
+            logger.info("Saving flight [{}]", returnFlight)
+            flightRepository.save(returnFlight)
+        }
+        return flights
     }
 }
