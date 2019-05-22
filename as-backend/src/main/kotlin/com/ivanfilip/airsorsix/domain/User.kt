@@ -15,25 +15,30 @@ data class User (
         @Column(name = "id", unique = true, nullable = false)
         val id: String = "",
 
-        @Column(name = "username", unique = true, nullable = false)
-        private val username: String,
+        @Column(name = "username", unique = true)
+        private val username: String = "",
 
-        @Column(name = "password", nullable = false)
-        private val password: String,
+        @Column(name = "password")
+        private val password: String = "",
 
-        @Column(name = "role", unique = true, nullable = false)
-        val role: String
+        @Column(name = "role", unique = true)
+        val role: String = "USER",
+
+        @Column(name = "provider")
+        val provider: String = ""
+
+        //isEnabled
 ) : UserDetails {
     override fun getAuthorities(): Collection<GrantedAuthority> =
             arrayListOf(role).map { SimpleGrantedAuthority(it) }
 
     override fun isEnabled(): Boolean = true
 
-    override fun getUsername(): String = username
+    override fun getUsername(): String? = username
 
     override fun isCredentialsNonExpired(): Boolean = true
 
-    override fun getPassword(): String = password
+    override fun getPassword(): String? = password
 
     override fun isAccountNonExpired(): Boolean = true
 

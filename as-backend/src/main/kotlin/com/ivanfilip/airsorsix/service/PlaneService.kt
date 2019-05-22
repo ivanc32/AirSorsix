@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class PlaneService(val repository: PlaneRepository) {
+class PlaneService(val planeRepository: PlaneRepository) {
 
     val logger = loggerFor<PlaneService>()
 
@@ -18,7 +18,7 @@ class PlaneService(val repository: PlaneRepository) {
                 economySeats =  numberEconomySeat, businessSeats = numberBusinessSeat,
                 economyPrice = priceEconomySeat, businessPrice = priceBusinessSeat)
         logger.info("Saving plane [{}]", plane)
-        repository.save(plane)
+        planeRepository.save(plane)
         return plane
     }
 }

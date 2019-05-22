@@ -15,11 +15,25 @@ class ReservationService (val reservationRepository: ReservationRepository,
 
     val logger = loggerFor<ReservationService>()
 
-    fun addNewReservation(userId: String, flightId: String, seatType: SeatType): Reservation? {
+    /*fun addNewReservation(userId: String, flightId: String, seatType: SeatType): Reservation? {
         val reservation = Reservation(flight = flightRepository.findFlightById(flightId) ?: return null,
                 user = userRepository.findUserById(userId) ?: return null,seatType =  seatType)
         logger.info("Saving reservation [{}]", reservation)
         reservationRepository.save(reservation)
         return reservation
+    }*/
+
+    fun addNewReservation(flightId: String, userId: String,
+                           economyTickets: Int, businessTicket: Int): Reservation? {
+        val reservation = Reservation(user = userRepository.findUserById(userId) ?: return null,
+                flight = flightRepository.findFlightById(flightId) ?: return null,
+                economyTickets = economyTickets,
+                businessTickets = businessTicket)
+        reservationRepository.save(reservation)
+        return reservation
+    }
+
+    fun findReservationsByFlight(flightId: String): List<Reservation>? {
+        return reservationRepository.findReservationsByFlight(flightRepository.findFlightById(flightId))
     }
 }
