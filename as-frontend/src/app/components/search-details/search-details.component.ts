@@ -3,8 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LocationService} from '../../service/location.service';
 import {FlightService} from '../../service/flight.service';
 import {forkJoin, Observable} from 'rxjs';
-import { Flight } from 'src/model/Flight';
-import { Location } from 'src/model/Location';
+import {Flight} from 'src/model/Flight';
+import {Location} from 'src/model/Location';
 
 @Component({
   selector: 'app-search-details',
@@ -26,8 +26,6 @@ export class SearchDetailsComponent implements OnInit {
   dateTo: string[];
   chosenGoFlight: Flight;
   chosenReturnFlight: Flight;
-  singleChoice = false;
-  doubleChoice = false;
 
   constructor(private activatedRoute: ActivatedRoute, private locationService: LocationService,
               private flightService: FlightService, private router: Router) {
@@ -38,10 +36,8 @@ export class SearchDetailsComponent implements OnInit {
     this.activatedRoute.queryParamMap.subscribe(url => {
       this.origin = url.get('origin');
       this.destination = url.get('destination');
-      if (url.get('datefrom') != null) {
-        this.dateFrom = url.get('datefrom').split(' ');
-        this.dateF = new Date(parseInt(this.dateFrom[0], 10), parseInt(this.dateFrom[1], 10) - 1, parseInt(this.dateFrom[2], 10));
-      }
+      this.dateFrom = url.get('datefrom').split(' ');
+      this.dateF = new Date(parseInt(this.dateFrom[0], 10), parseInt(this.dateFrom[1], 10) - 1, parseInt(this.dateFrom[2], 10));
       if (url.get('dateto') != null) {
         this.dateTo = url.get('dateto').split(' ');
         this.dateT = new Date(parseInt(this.dateTo[0], 10), parseInt(this.dateTo[1], 10) - 1, parseInt(this.dateTo[2], 10));
@@ -87,17 +83,11 @@ export class SearchDetailsComponent implements OnInit {
     }
   }
 
-  goToReservation(goToFlight: Flight, returnFlight: Flight, num: number) {
-    console.log(this.chosenGoFlight, this.chosenReturnFlight);
-    if (num === 1) {
-      this.router.navigateByUrl(`/reservation?flight=${goToFlight.id}`);
-    }
-    if (num === 2) {
-      if (returnFlight == null) {
-        return;
-      } else {
-        this.router.navigateByUrl(`/reservation?flight=${goToFlight.id}&flight=${returnFlight.id}`);
-      }
+  goToReservation(goToFlight: Flight, returnFlight: Flight) {
+    if (returnFlight == null) {
+      this.router.navigateByUrl(`/reserve?flight=${goToFlight.id}`);
+    } else {
+      this.router.navigateByUrl(`/reserve?flight=${goToFlight.id}&flight=${returnFlight.id}`);
     }
   }
 }

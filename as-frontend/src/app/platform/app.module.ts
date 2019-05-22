@@ -19,8 +19,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material';
 import { AppComponent } from '../app.component';
 import { HomePageComponent } from '../components/home-page/home-page.component';
-import { NavbarComponent } from '../components/home-page/navbar/navbar.component';
-import { FlightSearchComponent } from '../components/home-page/flight-search/flight-search.component';
+import { NavbarComponent } from '../components/navbar/navbar.component';
+import { FlightSearchComponent } from '../components/flight-search/flight-search.component';
 import { SearchDetailsComponent } from '../components/search-details/search-details.component';
 
 @NgModule({

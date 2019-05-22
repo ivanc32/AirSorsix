@@ -4,9 +4,9 @@
   <div class="list-group" *ngIf="flights && !returnFlights; else both">
     <h3>{{originLocation.city}} -----> {{destinationLocation.city}}</h3>
     <div class="list-group-item" *ngFor="let flight of flights">
-      <div class="bg-dark" (click)="chosenGoFlight = flight; singleChoice = true">{{ flight.code }}</div>
+      <div class="bg-dark" (click)="chosenGoFlight = flight">{{ flight.code }}</div>
     </div>
-    <button [disabled]="!singleChoice" (click)="goToReservation(chosenGoFlight, null, 1)">BOOK!</button>
+    <button [disabled]="!chosenGoFlight" (click)="goToReservation(chosenGoFlight, null)">BOOK!</button>
   </div>
 
   <ng-template #both>
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <button [disabled]="!(chosenGoFlight && chosenReturnFlight)"  (click)="goToReservation(chosenGoFlight, chosenReturnFlight, 2)">BOOK!</button>
+    <button [disabled]="!(chosenGoFlight && chosenReturnFlight)"  (click)="goToReservation(chosenGoFlight, chosenReturnFlight)">BOOK!</button>
   </ng-template>
 </div>
 
