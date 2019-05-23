@@ -1,29 +1,29 @@
-<div *ngIf="this.flight">
+<div *ngIf="flight">
 
   <div>
     <h3>Economy</h3>
 
-    <label>Free Seats: {{this.flight.plane.economySeats - this.takenEconomySeats}}</label>
+    <label>Free Seats: {{flight.plane.economySeats - takenEconomySeats}}</label>
 
     <label>Number of tickets</label>
-    <input type="text" value="{{this.economyTicketsToReserve}}">
+    <input type="text" value="{{economyTicketsToReserve}}">
     <button (click)="changeEconomyPlusMinusToggle(1)">+</button>
     <button (click)="changeEconomyPlusMinusToggle(-1)">-</button>
 
-    <label>Price for an Economy ticket {{this.flight.arrivalLocation.price + this.flight.plane.economyPrice}}</label>
+    <label>Price for an Economy ticket {{flight.arrivalLocation.price + flight.plane.economyPrice}}</label>
   </div>
 
-  <div *ngIf="this.flight.plane.businessSeats > 0">
+  <div *ngIf="flight.plane.businessSeats > 0">
     <h3>Business</h3>
 
-    <label>Free Seats: {{this.flight.plane.businessSeats - this.takenBusinessSeats}}</label>
+    <label>Free Seats: {{flight.plane.businessSeats - takenBusinessSeats}}</label>
 
     <label>Number of tickets</label>
-    <input type="text" value="{{this.businessTicketsToReserve}}">
+    <input type="text" value="{{businessTicketsToReserve}}">
     <button (click)="changeBusinessPlusMinusToggle(1)">+</button>
     <button (click)="changeBusinessPlusMinusToggle(-1)">-</button>
 
-    <label>Price for a Business ticket {{this.flight.arrivalLocation.price + this.flight.plane.businessPrice}}</label>
+    <label>Price for a Business ticket {{flight.arrivalLocation.price + flight.plane.businessPrice}}</label>
   </div>
 
   <button (click)="makeReservation()"><h2>Booktest</h2></button>

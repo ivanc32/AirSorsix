@@ -26,8 +26,8 @@ export class FlightSearchComponent implements OnInit {
   arrLocations: Location[];
   chosenDepLocation: Location;
   chosenArrLocation: Location;
-  flights: Flight[];
-  returnFlights: Flight[];
+  flights: Flight[] = null;
+  returnFlights: Flight[] = null;
   private searchOrigin$ = new Subject<string>();
   private searchDest$ = new Subject<string>();
   flightSearchFormGroup = new FormGroup({
@@ -74,7 +74,7 @@ export class FlightSearchComponent implements OnInit {
       this.arrLocations = locations;
     });
 
-    this.flightSearchFormGroup.get('dateFrom').valueChanges.subscribe(value => {
+    this.flightSearchFormGroup.get('dateFrom').valueChanges.subscribe(value => { // check if the submit form is valid on date changes
       this.flightSearchFormGroup.get('dateTo').setValue('');
       this.checkIfValid();
     });
@@ -82,8 +82,6 @@ export class FlightSearchComponent implements OnInit {
     this.flightSearchFormGroup.get('dateTo').valueChanges.subscribe(value =>
       this.checkIfValid()
     );
-
-    this.checkIfValid();
   }
 
   searchOrigin(origin: string) {
@@ -105,7 +103,7 @@ export class FlightSearchComponent implements OnInit {
     this.getFlights();
   }
 
-  onOriginChange(query: string) {
+  onOriginChange(query: string) { // set the selected locations to null on every origin change
     this.searchOrigin$.next(query);
     if (this.chosenDepLocation == null) {
       return;
@@ -129,7 +127,7 @@ export class FlightSearchComponent implements OnInit {
     }
   }
 
-  changeFlag(flag: boolean, value: string = '') {
+  changeFlag(flag: boolean, value: string = '') { // change the displayed locations
     this.daFlag = flag;
     this.resultsFlag = true;
     if (flag) {
@@ -161,14 +159,14 @@ export class FlightSearchComponent implements OnInit {
     }
   }
 
-  dateIsAfter(date: NgbDate, flightDate: NgbDateStruct): boolean {
+  dateIsAfter(date: NgbDate, flightDate: NgbDateStruct): boolean { // check if return flight date is after selected departure date
     const calendarDate = new Date(date.year, date.month - 1, date.day);
     const checkDate = new Date(flightDate.year, flightDate.month - 1, flightDate.day);
     return calendarDate > checkDate;
   }
 
-  hasFlight(date: NgbDate, flights: Flight[]): boolean {
-    if (flights !== undefined && flights !== null) {
+  hasFlight(date: NgbDate, flights: Flight[]): boolean {  // check which dates should be clickable
+    if (flights !== null) {
       let flag = false;
       const checkDate = new Date(date.year, date.month - 1, date.day);
       flights.forEach(flight => {
@@ -191,7 +189,7 @@ export class FlightSearchComponent implements OnInit {
 
   }
 
-  getFlights() {
+  getFlights() { // get the flights so you can see which dates are available
     this.flightService.getFlights(this.chosenDepLocation.airport, this.chosenArrLocation.airport).subscribe(flights => {
       this.flights = flights;
     });
