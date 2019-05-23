@@ -52,12 +52,12 @@
       </div>
 
       <ng-template #arrivals>
-        <div class="scroll">
+        <div class="scroll list-group">
           <h5>Destinations</h5>
-          <div class="list-group-item bg-info" *ngFor="let location of arrLocations">
-            <button class="bg-alert" (click)="onDestinationClick(location)">
+          <div class="list-group-item bg-info" *ngFor="let location of arrLocations"  (click)="onDestinationClick(location)">
+            <div class="bg-info" (click)="onDestinationClick(location)">
               <p><b>{{ location.country }}</b>  {{ location.city }}</p>
-            </button>
+            </div>
           </div>
         </div>
       </ng-template>
