@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { HttpHeaders } from '@angular/common/http';
 import { Plane } from 'src/model/Plane';
 
-const api = 'http://localhost:8080/api';
+const api = '/api';
 
 
 @Injectable({

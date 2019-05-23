@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Flight } from 'src/model/Flight';
 
-const api = 'http://localhost:8080/api';
+const api = '/api';
 
 @Injectable({
   providedIn: 'root'
