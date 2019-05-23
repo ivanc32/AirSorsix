@@ -15,10 +15,10 @@ export class LocationService {
 
   constructor(private http: HttpClient) { }
 
-  getObject<T>(url: string): Observable<T[]> {
-    return this.http.get<T[]>(url)
+  getObject<T>(url: string): Observable<T> {
+    return this.http.get<T>(url)
       .pipe(
-        catchError(this.handleError([]))
+        catchError(this.handleError(null))
       );
   }
 
@@ -41,15 +41,15 @@ export class LocationService {
   }
 
   searchOrigin(query: string): Observable<Location[]> {
-    return this.http.get<Location[]>(`${api}/origin/?origin=${query}`);
+    return this.getObject<Location[]>(`${api}/origin/?origin=${query}`);
   }
 
   searchDestinations(depAirport: string, query: string): Observable<Location[]> {
-    return this.http.get<Location[]>(`${api}/destinations/?origin=${depAirport}&destination=${query}`);
+    return this.getObject<Location[]>(`${api}/destinations/?origin=${depAirport}&destination=${query}`);
   }
 
   getLocation(depAirport: string): Observable<Location> {
-    return this.http.get<Location>(`${api}/location/?airport=${depAirport}`);
+    return this.getObject<Location>(`${api}/location/?airport=${depAirport}`);
   }
 
 

@@ -2,7 +2,6 @@ import { CreateDataComponent } from '../components/create-data/create-data.compo
 import { CreateDataLocationComponent } from '../components/create-data-location/create-data-location.component';
 import { CreateDataPlaneComponent } from '../components/create-data-plane/create-data-plane.component';
 import { CreateDataFlightComponent } from '../components/create-data-flight/create-data-flight.component';
-import { NavigationComponent } from '../navigation/navigation.component';
 import { AuthenticationService } from '../service/authentication.service';
 import { AuthGuard } from '../service/auth-guard.service';
 import { LoginComponent } from '../components/login/login.component';
@@ -19,8 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material';
 import { AppComponent } from '../app.component';
 import { HomePageComponent } from '../components/home-page/home-page.component';
-import { NavbarComponent } from '../components/home-page/navbar/navbar.component';
-import { FlightSearchComponent } from '../components/home-page/flight-search/flight-search.component';
+import { NavbarComponent } from '../components/navbar/navbar.component';
+import { FlightSearchComponent } from '../components/flight-search/flight-search.component';
 import { SearchDetailsComponent } from '../components/search-details/search-details.component';
 
 @NgModule({
@@ -34,7 +33,6 @@ import { SearchDetailsComponent } from '../components/search-details/search-deta
     CreateDataLocationComponent,
     CreateDataPlaneComponent,
     CreateDataFlightComponent,
-    NavigationComponent,
     LoginComponent,
     ReserveFlightComponent,
     FlightInfoComponent

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {distinctUntilChanged, switchMap} from 'rxjs/operators';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {LocationService} from '../../../service/location.service';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgbDate, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import {FlightService} from '../../../service/flight.service';
-import { Flight } from 'src/model/Flight';
-import { Location } from 'src/model/Location';
+import {Flight} from 'src/model/Flight';
+import {Location} from 'src/model/Location';
+import {LocationService} from '../../service/location.service';
+import {FlightService} from '../../service/flight.service';
 
 
 @Component({
@@ -20,14 +20,14 @@ export class FlightSearchComponent implements OnInit {
   daFlag = true;
   resultsFlag = false;
   twoWay = true;
-  checkbox = true;
   checked = false;
+  submitButton = true;
   depLocations: Location[];
   arrLocations: Location[];
   chosenDepLocation: Location;
   chosenArrLocation: Location;
-  flights: Flight[];
-  returnFlights: Flight[];
+  flights: Flight[] = null;
+  returnFlights: Flight[] = null;
   private searchOrigin$ = new Subject<string>();
   private searchDest$ = new Subject<string>();
   flightSearchFormGroup = new FormGroup({
@@ -36,8 +36,8 @@ export class FlightSearchComponent implements OnInit {
     dateFrom: new FormControl(''),
     dateTo: new FormControl('')
   });
-  isDisabled = (date: NgbDate, current: { month: number }) => !this.hasFlight(date, this.flights);
-  isDisabledTwoWay = (date: NgbDate, current: { month: number }) => !this.hasFlight(date, this.returnFlights) || !this.dateIsAfter(date, this.flightSearchFormGroup.get('dateFrom').value);
+  isDisabled = (date: NgbDate) => !this.hasFlight(date, this.flights);
+  isDisabledTwoWay = (date: NgbDate) => !this.hasFlight(date, this.returnFlights) || !this.dateIsAfter(date, this.flightSearchFormGroup.get('dateFrom').value);
 
 
   constructor(private locationService: LocationService, private activetedRoute: ActivatedRoute,
@@ -74,6 +74,14 @@ export class FlightSearchComponent implements OnInit {
       this.arrLocations = locations;
     });
 
+    this.flightSearchFormGroup.get('dateFrom').valueChanges.subscribe(value => { // check if the submit form is valid on date changes
+      this.flightSearchFormGroup.get('dateTo').setValue('');
+      this.checkIfValid();
+    });
+
+    this.flightSearchFormGroup.get('dateTo').valueChanges.subscribe(value =>
+      this.checkIfValid()
+    );
   }
 
   searchOrigin(origin: string) {
@@ -95,7 +103,8 @@ export class FlightSearchComponent implements OnInit {
     this.getFlights();
   }
 
-  onOriginChange() {
+  onOriginChange(query: string) { // set the selected locations to null on every origin change
+    this.searchOrigin$.next(query);
     if (this.chosenDepLocation == null) {
       return;
     }
@@ -107,7 +116,8 @@ export class FlightSearchComponent implements OnInit {
     }
   }
 
-  onDestinationChange() {
+  onDestinationChange(query: string) {
+    this.searchDest$.next(query);
     if (this.chosenArrLocation == null) {
       return;
     }
@@ -117,7 +127,7 @@ export class FlightSearchComponent implements OnInit {
     }
   }
 
-  changeFlag(flag: boolean, value: string = '') {
+  changeFlag(flag: boolean, value: string = '') { // change the displayed locations
     this.daFlag = flag;
     this.resultsFlag = true;
     if (flag) {
@@ -127,38 +137,41 @@ export class FlightSearchComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  checkIfValid() {
     if (this.chosenDepLocation != null && this.chosenArrLocation != null) {
-      const datefrom = this.flightSearchFormGroup.get('dateFrom').value;
-      if (datefrom === '') {
-        return;
-      }
-      if (this.twoWay) {
-        this.router.navigateByUrl(`search?origin=${this.chosenDepLocation.airport}&destination=${this.chosenArrLocation.airport}&datefrom=${datefrom.year}%20${datefrom.month}%20${datefrom.day}`);
+      if (!this.twoWay) {
+        this.submitButton = this.flightSearchFormGroup.get('dateFrom').value === '' || this.flightSearchFormGroup.get('dateTo').value === '';
       } else {
-        const dateto = this.flightSearchFormGroup.get('dateTo').value;
-        if (dateto === '') {
-          return;
-        }
-        this.router.navigateByUrl(`search?origin=${this.chosenDepLocation.airport}&destination=${this.chosenArrLocation.airport}&datefrom=${datefrom.year}%20${datefrom.month}%20${datefrom.day}&dateto=${dateto.year}%20${dateto.month}%20${dateto.day}`);
+        this.submitButton = this.flightSearchFormGroup.get('dateFrom').value === '';
       }
+    } else {
+      this.submitButton = true;
     }
   }
 
-  dateIsAfter(date: NgbDate, flightDate: NgbDateStruct): boolean {
+  onSubmit() {
+    const datefrom = this.flightSearchFormGroup.get('dateFrom').value;
+    if (this.twoWay) {
+      this.router.navigateByUrl(`search?origin=${this.chosenDepLocation.airport}&destination=${this.chosenArrLocation.airport}&datefrom=${datefrom.year}%20${datefrom.month}%20${datefrom.day}`);
+    } else {
+      const dateto = this.flightSearchFormGroup.get('dateTo').value;
+      this.router.navigateByUrl(`search?origin=${this.chosenDepLocation.airport}&destination=${this.chosenArrLocation.airport}&datefrom=${datefrom.year}%20${datefrom.month}%20${datefrom.day}&dateto=${dateto.year}%20${dateto.month}%20${dateto.day}`);
+    }
+  }
+
+  dateIsAfter(date: NgbDate, flightDate: NgbDateStruct): boolean { // check if return flight date is after selected departure date
     const calendarDate = new Date(date.year, date.month - 1, date.day);
     const checkDate = new Date(flightDate.year, flightDate.month - 1, flightDate.day);
     return calendarDate > checkDate;
   }
 
-  hasFlight(date: NgbDate, flights: Flight[]): boolean {
-    if (flights !== undefined && flights !== null) {
+  hasFlight(date: NgbDate, flights: Flight[]): boolean {  // check which dates should be clickable
+    if (flights !== null) {
       let flag = false;
       const checkDate = new Date(date.year, date.month - 1, date.day);
       flights.forEach(flight => {
         const newDate = new Date(flight.departureDateTime);
         if (checkDate.toDateString() === newDate.toDateString()) {
-          console.log(checkDate.toDateString(), newDate.toDateString());
           flag = true;
         }
       });
@@ -169,24 +182,29 @@ export class FlightSearchComponent implements OnInit {
 
   deleteFlights() {
     this.flights = null;
-    this.checkbox = true;
     this.twoWay = true;
     this.checked = false;
     this.flightSearchFormGroup.get('dateFrom').setValue(null);
     this.flightSearchFormGroup.get('dateTo').setValue(null);
 
   }
-
-  getFlights() {
+  
+  getFlights() { // get the flights so you can see which dates are available
     this.flightService.getFlights(this.chosenDepLocation.airport, this.chosenArrLocation.airport).subscribe(flights => {
       this.flights = flights;
-      this.checkbox = false;
+
     });
 
     this.flightService.getFlights(this.chosenArrLocation.airport, this.chosenDepLocation.airport).subscribe(flights => {
       this.returnFlights = flights;
-      this.checkbox = false;
     });
+  }
+
+  twoWayClick() {
+    this.twoWay = !this.twoWay;
+    this.checked = !this.checked;
+    this.flightSearchFormGroup.get('dateTo').setValue('');
+    this.checkIfValid();
   }
 
 }

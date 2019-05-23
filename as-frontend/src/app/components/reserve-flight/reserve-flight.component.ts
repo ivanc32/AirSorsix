@@ -1,6 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import {Component, OnInit, Output} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-reserve-flight',
@@ -11,8 +11,13 @@ export class ReserveFlightComponent implements OnInit {
 
   @Output() flight: string;
   @Output() returnFlight: string;
+  flightEconomySeats = 0;
+  flightBusinessSeats = 0;
+  returnFlightEconomySeats = 0;
+  returnFlightBusinessSeats = 0;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.route.queryParamMap.pipe(
@@ -23,4 +28,10 @@ export class ReserveFlightComponent implements OnInit {
       console.log(params);
     });
   }
+
+  onPress() {
+    console.log(this.returnFlightEconomySeats);
+    console.log(this.flightEconomySeats, this.flightBusinessSeats, this.returnFlightEconomySeats, this.returnFlightBusinessSeats);
+  }
+
 }
