@@ -23,7 +23,7 @@ class SecurityConfiguration (val userService: UserService,
 
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
-                .antMatchers("/api/admin/create/**")
+                .antMatchers("/api/create/**")
                 .authenticated()
                 .anyRequest()
                 .permitAll()
