@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Flight } from 'src/model/Flight';
-import { FlightService } from '../../service/flight.service';
-import { ReservationService } from '../../service/reservation.service';
-import { forkJoin } from 'rxjs';
-import { Reservation } from 'src/model/Reservation';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Flight} from 'src/model/Flight';
+import {FlightService} from '../../service/flight.service';
+import {ReservationService} from '../../service/reservation.service';
+import {forkJoin} from 'rxjs';
+import {Reservation} from 'src/model/Reservation';
 
 @Component({
   selector: 'app-flight-info',
@@ -20,13 +20,13 @@ export class FlightInfoComponent implements OnInit {
   priceOfEconomyTicket: number;
   economyTicketsToReserve = 0;
   businessTicketsToReserve = 0;
+  @Output() emitEconomyTickets = new EventEmitter<number>();
+  @Output() emitBusinessTickets = new EventEmitter<number>();
 
-
-
-  constructor(private flightService: FlightService, private reservationService: ReservationService) { }
+  constructor(private flightService: FlightService, private reservationService: ReservationService) {
+  }
 
   ngOnInit() {
-    console.log(this.flightId);
     forkJoin(
       this.flightService.getFlightById(`${this.flightId}`),
       this.reservationService.getReservationsByFlight(`${this.flightId}`))
@@ -38,6 +38,7 @@ export class FlightInfoComponent implements OnInit {
         this.takenBusinessSeats = this.reservations.reduce((sum, item) => sum + item.businessTickets, 0);
         this.takenEconomySeats = this.reservations.reduce((sum, item) => sum + item.economyTickets, 0);
       });
+
   }
 
   changeBusinessPlusMinusToggle(update: number) {
@@ -50,6 +51,7 @@ export class FlightInfoComponent implements OnInit {
     if (this.businessTicketsToReserve > this.flight.plane.businessSeats - this.takenBusinessSeats) {
       this.businessTicketsToReserve = this.flight.plane.businessSeats - this.takenBusinessSeats;
     }
+    this.emitBusinessTickets.emit(this.businessTicketsToReserve);
   }
 
   changeEconomyPlusMinusToggle(update: number) {
@@ -62,15 +64,17 @@ export class FlightInfoComponent implements OnInit {
     if (this.economyTicketsToReserve > this.flight.plane.economySeats - this.takenEconomySeats) {
       this.economyTicketsToReserve = this.flight.plane.economySeats - this.takenEconomySeats;
     }
+    this.emitEconomyTickets.emit(this.economyTicketsToReserve);
   }
 
   makeReservation() {
     console.log(this.flight);
     this.reservationService.postReservation({
-      flightId: this.flightId, userId: '123',
-      economyTickets: this.economyTicketsToReserve, businessTickets: this.businessTicketsToReserve}
+        flightId: this.flightId, userId: '123',
+        economyTickets: this.economyTicketsToReserve, businessTickets: this.businessTicketsToReserve
+      }
     )
-    .subscribe(it => console.log(it));
+      .subscribe(it => console.log(it));
   }
 
 }

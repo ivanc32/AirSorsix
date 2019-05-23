@@ -1,4 +1,8 @@
 <h1>Sorsix Logo</h1>
-<app-flight-info *ngIf="flight" [flightId] = 'flight'></app-flight-info>
-<app-flight-info *ngIf="returnFlight" [flightId] = 'returnFlight'></app-flight-info>
-<button><h2>Book</h2></button>
+<app-flight-info *ngIf="flight" [flightId] = 'flight'
+                 (emitEconomyTickets)="flightEconomySeats = $event" (emitBusinessTickets)="flightBusinessSeats = $event">
+</app-flight-info>
+<app-flight-info *ngIf="returnFlight" [flightId] = 'returnFlight'
+                 (emitEconomyTickets)="returnFlightEconomySeats = $event" (emitBusinessTickets)="returnFlightBusinessSeats = $event">
+</app-flight-info>
+<button (click)="onPress()"><h2>Book</h2></button>
