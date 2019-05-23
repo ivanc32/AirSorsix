@@ -1,19 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { HttpHeaders } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 import { Location } from 'src/model/Location';
 
 
-const api = 'http://localhost:8080/api';
+const api = '/api';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
-  })
-};
 
 @Injectable({
   providedIn: 'root'

@@ -1,15 +1,18 @@
 <div class="mt-5 pt-2">
   <div class="d-flex">
     <div class="col-6 bg-light p-2">
+
       <form [formGroup]="flightSearchFormGroup" autocomplete="off">
         <fieldset class="form-group">
           <label for="origin">Origin</label>
           <input type="text" class="form-control" formControlName="origin" id="origin" placeholder="origin" #originInput
                  (click)="changeFlag(true, originInput.value)" (ngModelChange)="onOriginChange(originInput.value)">
+
         </fieldset>
         <fieldset class="form-group">
           <label for="destination">Destination</label>
           <input type="text" class="form-control" formControlName="destination" id="destination"
+
                  placeholder="destination" #destinationInput (click)="changeFlag(false, destinationInput.value)"
                  (ngModelChange)="onDestinationChange(destinationInput.value)">
         </fieldset>
@@ -28,11 +31,13 @@
         <div class="input-group mt-1">
           <input class="form-control" type="text" ngbDatepicker #d="ngbDatepicker"  formControlName="dateTo"
                  [minDate]="{year: 2019, month: 1, day: 1}" [markDisabled]="isDisabledTwoWay"
+
                  [maxDate]="{year: 2021, month: 12, day: 31}" [disabled]="twoWay" (keydown)="false"/>
           <button (click)="d.toggle()" class="btn-outline-primary ml-1">Return</button>
         </div>
 
         <button type="submit" class="btn btn-primary mt-3" [disabled]="submitButton" (click)="onSubmit()">Search</button>
+
       </form>
     </div>
 

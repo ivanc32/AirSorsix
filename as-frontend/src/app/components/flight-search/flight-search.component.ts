@@ -188,10 +188,11 @@ export class FlightSearchComponent implements OnInit {
     this.flightSearchFormGroup.get('dateTo').setValue(null);
 
   }
-
+  
   getFlights() { // get the flights so you can see which dates are available
     this.flightService.getFlights(this.chosenDepLocation.airport, this.chosenArrLocation.airport).subscribe(flights => {
       this.flights = flights;
+
     });
 
     this.flightService.getFlights(this.chosenArrLocation.airport, this.chosenDepLocation.airport).subscribe(flights => {

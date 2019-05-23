@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { Reservation } from 'src/model/Reservation';
 
 
-const api = 'http://localhost:8080/api';
+const api = '/api';
 
 @Injectable({
   providedIn: 'root'
