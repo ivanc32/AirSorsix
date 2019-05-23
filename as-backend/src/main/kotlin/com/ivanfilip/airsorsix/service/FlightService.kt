@@ -23,6 +23,7 @@ class FlightService(val flightRepository: FlightRepository,
     fun getDepartureLocations(origin: String? = ""): List<Location>?{
         //val locations: List<Location>? = flightRepository.findAllDistinctDepartureLocations()
         //return locations?.filter { it.city.startsWith(origin ?: return locations, ignoreCase = true) }
+        logger.info("Getting departure locations by query [{}]", origin)
         return flightRepository
                 .findAllDistinctDepartureLocations()
                 ?.filter { it.city.startsWith(origin ?: "", ignoreCase = true) }
@@ -31,18 +32,21 @@ class FlightService(val flightRepository: FlightRepository,
     fun getArrivalLocations(origin: String, destination: String?): List<Location>?{
         /*val locations: List<Location>? = flightRepository.findAllDistinctArrivalLocations(locationRepository.findLocationByAirport(origin))
         return locations?.filter { it.city.startsWith(destination ?: return locations, ignoreCase = true) }*/
+        logger.info("Getting arrival locations by origin [{}] and query [{}]", origin, destination)
         return flightRepository
                 .findAllDistinctArrivalLocations(locationRepository.findLocationByAirport(origin))
                 ?.filter { it.city.startsWith(destination ?: "", ignoreCase = true) }
     }
 
     fun getFlightsByLocation(origin: String, destination: String): List<Flight>?{
+        logger.info("Getting flights from origin [{}] and destination [{}]", origin, destination)
         return flightRepository
                 .findAllByDepartureLocationAndArrivalLocation(locationRepository.findLocationByAirport(origin),
                         locationRepository.findLocationByAirport(destination))
     }
 
     fun getFlightById(id: String): Flight? {
+        logger.info("Get flight with id [{}]", id)
         return flightRepository.findFlightById(id)
     }
 

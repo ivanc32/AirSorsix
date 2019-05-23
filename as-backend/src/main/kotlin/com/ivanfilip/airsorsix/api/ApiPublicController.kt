@@ -18,20 +18,10 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
 class ApiPublicController(val flightService: FlightService,
                           val userService: UserService,
                           val locationService: LocationService,
                           val reservationService: ReservationService) {
-
-
-    @PostMapping("/flight")
-    fun createFlight(@RequestBody @Valid flight: CreateFlightRequest): ResponseEntity<List<Flight>> =
-            flightService.addNewFlight(flight.planeId, flight.code, flight.departureDateTime,
-                    flight.arrivalDateTime, flight.departureLocationId, flight.arrivalLocationId)?.let {
-                ResponseEntity.ok(it)
-            } ?: ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
-
 
     @GetMapping("/origin/")
     fun departureLocations(@RequestParam(value = "origin", required = false) origin: String?): List<Location>? =

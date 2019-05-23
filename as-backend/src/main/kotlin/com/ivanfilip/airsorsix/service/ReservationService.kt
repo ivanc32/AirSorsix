@@ -1,6 +1,5 @@
 package com.ivanfilip.airsorsix.service
 
-import com.ivanfilip.airsorsix.custom_types.SeatType
 import com.ivanfilip.airsorsix.domain.Reservation
 import com.ivanfilip.airsorsix.repository.FlightRepository
 import com.ivanfilip.airsorsix.repository.ReservationRepository
@@ -30,6 +29,7 @@ class ReservationService (val reservationRepository: ReservationRepository,
                 economyTickets = economyTickets,
                 businessTickets = businessTicket)
         reservationRepository.save(reservation)
+        logger.info("Add reservation with details [{}]", reservation)
         return reservation
     }
 

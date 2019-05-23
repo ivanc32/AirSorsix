@@ -12,6 +12,7 @@ class LocationService(val locationRepository: LocationRepository) {
     val logger = loggerFor<LocationService>()
 
     fun getLocationByAirport(airport: String): Location? {
+        logger.info("searching for location with airport [{}]", airport);
         return locationRepository.findLocationByAirport(airport)
     }
 
