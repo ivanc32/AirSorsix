@@ -1,6 +1,6 @@
 <h2>Login form</h2>
 
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" (ngSubmit)="logIn()">
     <div class="form-group">
         <label>
           Username
@@ -14,11 +14,6 @@
       </label>
     </div>
     <div class="form-group">
-        <button>
-          Login
-        </button>
-    </div>
-    <div class="form-group">
         <button [disabled]="!loginForm.valid">
           <a class="nav-link" href="http://localhost:8080/api/login/github">
             Login with Github
@@ -26,6 +21,6 @@
         </button>
     </div>
     <div class="form-group">
-        <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+        <button type="submit" [disabled]="!loginForm.valid">Login</button>
     </div>
   </form>
