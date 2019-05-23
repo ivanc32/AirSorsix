@@ -3,8 +3,8 @@
 <div class="container scroll mt-5 pt-2">
   <div class="list-group" *ngIf="flights && !returnFlights; else both">
     <h3>{{originLocation.city}} -----> {{destinationLocation.city}}</h3>
-    <div class="list-group-item" *ngFor="let flight of flights">
-      <div class="bg-dark" (click)="chosenGoFlight = flight">{{ flight.code }}</div>
+    <div class="list-group-item bg-success" (click)="chosenGoFlight = flight" *ngFor="let flight of flights">
+        {{ flight.code }}
     </div>
     <button [disabled]="!chosenGoFlight" (click)="goToReservation(chosenGoFlight, null)">BOOK!</button>
   </div>
@@ -13,22 +13,20 @@
     <div *ngIf="flights && returnFlights">
       <h3>{{originLocation.city}} -----> {{destinationLocation.city}}</h3>
       <div class="list-group" *ngFor="let flight of flights">
-        <div class="list-group-item">
-          <div class="bg-dark" (click)="chosenGoFlight = flight">
-            {{ flight.code }}
-          </div>
+        <div class="list-group-item bg-success" (click)="chosenGoFlight = flight">
+          {{ flight.code }}
         </div>
       </div>
       <h3>{{destinationLocation.city}} -----> {{originLocation.city}}</h3>
       <div class="list-group" *ngFor="let flight of returnFlights">
-        <div class="list-group-item">
-          <div class="bg-dark" (click)="chosenReturnFlight = flight">
-            {{ flight.code }}
-          </div>
+        <div class="list-group-item bg-success" (click)="chosenReturnFlight = flight">
+          {{ flight.code }}
         </div>
       </div>
     </div>
-    <button [disabled]="!(chosenGoFlight && chosenReturnFlight)"  (click)="goToReservation(chosenGoFlight, chosenReturnFlight)">BOOK!</button>
+    <button [disabled]="!(chosenGoFlight && chosenReturnFlight)"
+            (click)="goToReservation(chosenGoFlight, chosenReturnFlight)">BOOK!
+    </button>
   </ng-template>
 </div>
 
