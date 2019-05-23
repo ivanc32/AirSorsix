@@ -1,8 +1,20 @@
-<h1>Sorsix Logo</h1>
-<app-flight-info *ngIf="flight" [flightId] = 'flight'
-                 (emitEconomyTickets)="flightEconomySeats = $event" (emitBusinessTickets)="flightBusinessSeats = $event">
-</app-flight-info>
-<app-flight-info *ngIf="returnFlight" [flightId] = 'returnFlight'
-                 (emitEconomyTickets)="returnFlightEconomySeats = $event" (emitBusinessTickets)="returnFlightBusinessSeats = $event">
-</app-flight-info>
+<app-navbar></app-navbar>
+<div class="d-flex container">
+  <div class="col-lg-6" *ngIf="flight">
+    <h2>Initial flight:</h2>
+    <app-flight-info [flightId]='flight'
+                     (emitEconomyTickets)="flightEconomySeats = $event"
+                     (emitBusinessTickets)="flightBusinessSeats = $event">
+    </app-flight-info>
+  </div>
+  <div class="col-lg-6" *ngIf="returnFlight">
+    <h2>Return flight:</h2>
+  <app-flight-info  [flightId]='returnFlight'
+                   (emitEconomyTickets)="returnFlightEconomySeats = $event"
+                   (emitBusinessTickets)="returnFlightBusinessSeats = $event">
+  </app-flight-info>
+  </div>
+</div>
+<div class="text-center mt-3">
 <button (click)="onPress()"><h2>Book</h2></button>
+</div>

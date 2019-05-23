@@ -67,14 +67,4 @@ export class FlightInfoComponent implements OnInit {
     this.emitEconomyTickets.emit(this.economyTicketsToReserve);
   }
 
-  makeReservation() {
-    console.log(this.flight);
-    this.reservationService.postReservation({
-        flightId: this.flightId, userId: '123',
-        economyTickets: this.economyTicketsToReserve, businessTickets: this.businessTicketsToReserve
-      }
-    )
-      .subscribe(it => console.log(it));
-  }
-
 }
