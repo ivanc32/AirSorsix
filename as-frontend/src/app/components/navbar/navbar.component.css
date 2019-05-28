@@ -1,4 +1,9 @@
 .navbar {
   border-bottom: 3px solid;
-  border-bottom-color: #2782ff;
+  border-bottom-color: #F81B47;
+  background-color: #ffe9f0;
+}
+
+#logo {
+  height: 50px;
 }

@@ -1,3 +1,50 @@
-body{
-  color: brown;
+
+.sorsix-button {
+  color: #F81B47;
+  background-color: #BABABA;
+  border-color: #F81B47;
 }
+
+.sorsix-button:hover,
+.sorsix-button:focus,
+.sorsix-button:active,
+.sorsix-button.active,
+.open .dropdown-toggle.sorsix-button {
+  color: #F81B47;
+  background-color: #F81B47;
+  border-color: #F81B47;
+  color: #feefff;
+}
+
+.sorsix-button:active,
+.sorsix-button.active,
+.open .dropdown-toggle.sorsix-button {
+  background-image: none;
+  color: #feefff;
+}
+
+.sorsix-button.disabled,
+.sorsix-button[disabled],
+fieldset[disabled] .sorsix-button,
+.sorsix-button.disabled:hover,
+.sorsix-button[disabled]:hover,
+fieldset[disabled] .sorsix-button:hover,
+.sorsix-button.disabled:focus,
+.sorsix-button[disabled]:focus,
+fieldset[disabled] .sorsix-button:focus,
+.sorsix-button.disabled:active,
+.sorsix-button[disabled]:active,
+fieldset[disabled] .sorsix-button:active,
+.sorsix-button.disabled.active,
+.sorsix-button[disabled].active,
+fieldset[disabled] .sorsix-button.active {
+  background-color: #BABABA;
+  border-color: #F81B47;
+  color: #feefff;
+}
+
+.sorsix-button .badge {
+  color: #BABABA;
+  background-color: #F81B47;
+}
+
