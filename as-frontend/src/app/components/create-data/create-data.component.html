@@ -1,10 +1,9 @@
-<h1>Data Creation Form</h1>
+<h2>Data Creation Form</h2>
 
 <div>
-    <button><a class="dropdown-item" href="/api/logout">Logout</a></button>
-  <button label="Locaion" (click)="showComponent = 1">Locaton</button>
-  <button label="Plane" (click)="showComponent = 2">Plane</button>
-  <button label="Flight" (click)="showComponent = 3">Flight</button>
+  <button class="btn-lg btn-outline-primary" label="Locaion" (click)="showComponent = 1">Locaton</button>
+  <button class="btn-lg btn-outline-primary" label="Plane" (click)="showComponent = 2">Plane</button>
+  <button class="btn-lg btn-outline-primary" label="Flight" (click)="showComponent = 3">Flight</button>
 </div>
 
 <div *ngIf="showComponent">

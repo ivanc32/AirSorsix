@@ -36,6 +36,6 @@ export class RegisterService {
   }
 
   registerUser(user: User) {
-    return this.postObject<User>(`${api}/user/create/reservation`, user);
+    return this.postObject<User>(`${api}/register`, user);
   }
 }

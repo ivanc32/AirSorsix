@@ -20,19 +20,16 @@ class ApiAdminController(val flightService: FlightService,
 
     @PostMapping("/location")
     fun createLocation(@RequestBody @Valid location: CreateLocationRequest): Location =
-            locationService.addNewLocation(location.city, location.country, location.airport,
-                location.price)
+            locationService.addNewLocation(location)
 
 
     @PostMapping("/plane")
     fun createPlane(@RequestBody @Valid plane: CreatePlaneRequest): Plane =
-            planeService.addNewPlane(plane.manuufacturer, plane.model, plane.numberOfEconomySeat,
-                plane.numberOfBusinessSeat, plane.priceOfEconomySeat, plane.priceOfBusinessSeat)
+            planeService.addNewPlane(plane)
 
     @PostMapping("/flight")
     fun createFlight(@RequestBody @Valid flight: CreateFlightRequest): ResponseEntity<List<Flight>?> =
-            flightService.addNewFlight(flight.planeId, flight.code, flight.departureDateTime,
-                flight.arrivalDateTime, flight.departureLocationId, flight.arrivalLocationId)?.let {
+            flightService.addNewFlight(flight)?.let {
             ResponseEntity.ok(it)
         } ?: ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
 }

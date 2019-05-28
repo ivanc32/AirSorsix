@@ -14,7 +14,6 @@ export class FlightInfoComponent implements OnInit {
 
   @Input() flightId: string;
   flight: Flight;
-  reservations: Reservation[]; // redundant
   takenEconomySeats: number;
   takenBusinessSeats: number;
   priceOfEconomyTicket: number;
@@ -33,10 +32,8 @@ export class FlightInfoComponent implements OnInit {
       .subscribe(([flight, reservations]) => {
         this.flight = flight;
         console.log(this.flight);
-        this.reservations = reservations;
-        console.log(this.reservations);
-        this.takenBusinessSeats = this.reservations.reduce((sum, item) => sum + item.businessTickets, 0);
-        this.takenEconomySeats = this.reservations.reduce((sum, item) => sum + item.economyTickets, 0);
+        this.takenBusinessSeats = reservations.reduce((sum, item) => sum + item.businessTickets, 0);
+        this.takenEconomySeats = reservations.reduce((sum, item) => sum + item.economyTickets, 0);
       });
 
   }

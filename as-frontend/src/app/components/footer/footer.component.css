@@ -1,0 +1,12 @@
+footer {
+  border-bottom: 3px solid;
+  border-bottom-color: #313d66;
+  background-color: #293c46;
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+}
+
+img {
+  width: 5%
+}

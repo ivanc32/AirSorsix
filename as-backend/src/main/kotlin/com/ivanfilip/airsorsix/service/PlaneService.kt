@@ -1,5 +1,6 @@
 package com.ivanfilip.airsorsix.service
 
+import com.ivanfilip.airsorsix.api.CreatePlaneRequest
 import com.ivanfilip.airsorsix.domain.Plane
 import com.ivanfilip.airsorsix.repository.PlaneRepository
 import com.ivanfilip.airsorsix.utills.loggerFor
@@ -12,11 +13,13 @@ class PlaneService(val planeRepository: PlaneRepository) {
     val logger = loggerFor<PlaneService>()
 
     @Transactional
-    fun addNewPlane(manufacturer: String, model: String, numberBusinessSeat: Int, priceBusinessSeat: Int,
-                    numberEconomySeat: Int, priceEconomySeat: Int): Plane {
-        val plane = Plane(manufacturer =  manufacturer, model = model,
-                economySeats =  numberEconomySeat, businessSeats = numberBusinessSeat,
-                economyPrice = priceEconomySeat, businessPrice = priceBusinessSeat)
+    fun addNewPlane(planeDto: CreatePlaneRequest): Plane {
+        val plane = Plane(manufacturer =  planeDto.manufacturer,
+                model = planeDto.model,
+                economySeats =  planeDto.numberEconomySeat,
+                businessSeats = planeDto.numberBusinessSeat,
+                economyPrice = planeDto.priceEconomySeat,
+                businessPrice = planeDto.priceBusinessSeat)
         logger.info("Saving plane [{}]", plane)
         planeRepository.save(plane)
         return plane
