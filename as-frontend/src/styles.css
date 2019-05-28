@@ -1,8 +1,11 @@
 
 .sorsix-button {
-  color: #F81B47;
-  background-color: #BABABA;
-  border-color: #F81B47;
+  color: #ffffff;
+  background-color: #313d66;
+  border-color: #313d66;
+  border-width: 1px;
+  border-radius: 3px;
+  font-size: 18px;
 }
 
 .sorsix-button:hover,
@@ -10,9 +13,9 @@
 .sorsix-button:active,
 .sorsix-button.active,
 .open .dropdown-toggle.sorsix-button {
-  color: #F81B47;
-  background-color: #F81B47;
-  border-color: #F81B47;
+  color: #313d66;
+  background-color: #313d66;
+  border-color: #313d66;
   color: #feefff;
 }
 
@@ -39,12 +42,12 @@ fieldset[disabled] .sorsix-button:active,
 .sorsix-button[disabled].active,
 fieldset[disabled] .sorsix-button.active {
   background-color: #BABABA;
-  border-color: #F81B47;
+  border-color: #313d66;
   color: #feefff;
 }
 
 .sorsix-button .badge {
   color: #BABABA;
-  background-color: #F81B47;
+  background-color: #313d66;
 }
 

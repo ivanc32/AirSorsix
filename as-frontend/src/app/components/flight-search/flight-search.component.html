@@ -1,6 +1,6 @@
 <div class="mt-5 pt-2">
   <div class="d-flex">
-    <div class="col-6 form-plate p-3">
+    <div class="col-6 form-plate bg-cornflower p-3">
 
       <form [formGroup]="flightSearchFormGroup" autocomplete="off">
         <fieldset class="form-group">
@@ -32,7 +32,6 @@
         <div class="input-group mt-1">
           <input class="form-control" type="text" ngbDatepicker #d="ngbDatepicker" formControlName="dateTo"
                  [minDate]="{year: 2019, month: 1, day: 1}" [markDisabled]="isDisabledTwoWay"
-
                  [maxDate]="{year: 2021, month: 12, day: 31}" [disabled]="twoWay" (keydown)="false"/>
           <button (click)="d.toggle()" class="calendar-button sorsix-button ml-1">Return</button>
         </div>
@@ -45,23 +44,33 @@
       </form>
     </div>
 
-    <div class="col-3" *ngIf="resultsFlag">
-      <div class="scroll list-group" *ngIf="daFlag; else arrivals">
-        <h5>Departure locations</h5>
-        <a class="bg-info list-group-item" *ngFor="let location of depLocations" (click)="onOriginClick(location)">
-          <div class="bg-info" (click)="onOriginClick(location)">
-            <p><b>{{ location.country }}</b>  {{ location.city }}</p>
+    <div class="col-4" *ngIf="resultsFlag">
+      <div class="scroll list-group form-plate bg-cornflower-dark" *ngIf="daFlag; else arrivals">
+        <h4>Departure locations</h4>
+        <div class="list-group-item bg-cornflower item-hover" *ngFor="let location of depLocations" (click)="onOriginClick(location)">
+          <div class="container-fluid" (click)="onOriginClick(location)">
+            <div class="row">
+              <p class="item-text"><b>{{ location.city }}</b></p>
+            </div>
+            <div class="row">
+              <p class="item-text">{{location.country}}</p>
+            </div>
           </div>
-        </a>
+        </div>
       </div>
 
       <ng-template #arrivals>
-        <div class="scroll list-group">
-          <h5>Destinations</h5>
-          <div class="list-group-item bg-info" *ngFor="let location of arrLocations"
+        <div class="scroll list-group form-plate bg-cornflower-dark">
+          <h4>Destinations</h4>
+          <div class="list-group-item bg-cornflower item-hover" *ngFor="let location of arrLocations"
                (click)="onDestinationClick(location)">
-            <div class="bg-info" (click)="onDestinationClick(location)">
-              <p><b>{{ location.country }}</b>  {{ location.city }}</p>
+            <div class="container-fluid" (click)="onDestinationClick(location)">
+              <div class="row">
+                <p class="item-text"><b>{{ location.city }}</b></p>
+              </div>
+              <div class="row">
+                <p class="item-text">{{location.country}}</p>
+              </div>
             </div>
           </div>
         </div>
