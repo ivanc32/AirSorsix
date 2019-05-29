@@ -1,4 +1,31 @@
 .navbar {
   border-bottom: 3px solid;
-  border-bottom-color: #2782ff;
+  border-bottom-color: #313d66;
+  background-color: #293c46;
+}
+
+body {
+  background-color: white;
+}
+
+#logo {
+  height: 50px;
+}
+
+.navbar-nav {
+  margin: 0%;
+  width: 30%;
+
+}
+
+.nav-item {
+  width: 100%;
+  float: right;
+}
+
+.btn-outline-primary {
+  color: white;
+  border-color: white;
+  background-color: rgb(253, 22, 72);
+  margin: 0% 1% 0 1% ;
 }

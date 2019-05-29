@@ -1,0 +1,16 @@
+footer {
+  border-bottom: 3px solid;
+  border-bottom-color: #313d66;
+  background-color: #293c46;
+  bottom: 0;
+  width: 100%;
+  height: 13%;
+  position: absolute;
+  padding: 0;
+}
+
+img {
+  width: 5%;
+  padding: 0;
+  margin: 0;
+}

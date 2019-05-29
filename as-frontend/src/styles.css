@@ -1,3 +1,8 @@
 body{
-  color: brown;
+    background-image: url("src/assets/img/airSorsixBackground.png");
+    background-size: 100%;
+}
+
+.btn-outline-primary {
+  color: #FC2958;
 }

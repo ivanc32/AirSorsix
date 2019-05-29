@@ -1,6 +1,5 @@
 package com.ivanfilip.airsorsix.domain
 
-import com.ivanfilip.airsorsix.custom_types.SeatType
 import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 import javax.persistence.*

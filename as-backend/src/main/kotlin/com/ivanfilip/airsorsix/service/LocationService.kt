@@ -1,5 +1,6 @@
 package com.ivanfilip.airsorsix.service
 
+import com.ivanfilip.airsorsix.api.CreateLocationRequest
 import com.ivanfilip.airsorsix.domain.Location
 import com.ivanfilip.airsorsix.repository.LocationRepository
 import com.ivanfilip.airsorsix.utills.loggerFor
@@ -17,9 +18,11 @@ class LocationService(val locationRepository: LocationRepository) {
     }
 
     @Transactional
-    fun addNewLocation(city: String, country: String, airport: String, price: Int): Location {
-        val location = Location(city = city, country = country,
-                airport = airport, price = price)
+    fun addNewLocation(locationDto: CreateLocationRequest): Location {
+        val location = Location(city = locationDto.city,
+                country = locationDto.country,
+                airport = locationDto.airport,
+                price = locationDto.price)
         logger.info("Saving location [{}]", location)
         locationRepository.save(location)
         return location
