@@ -6,22 +6,22 @@ import javax.validation.constraints.NotNull
 class CreatePlaneRequest(
         @NotNull
         @Min(1)
-        val priceOfBusinessSeat: Int,
+        val priceBusinessSeat: Int,
 
         @NotNull
         @Min(1)
-        val numberOfBusinessSeat: Int,
+        val numberBusinessSeat: Int,
 
         @NotNull
         @Min(1)
-        val priceOfEconomySeat: Int,
+        val priceEconomySeat: Int,
 
         @NotNull
         @Min(1)
-        val numberOfEconomySeat: Int,
+        val numberEconomySeat: Int,
 
         @NotNull
-        val manuufacturer: String,
+        val manufacturer: String,
 
         @NotNull
         val model: String

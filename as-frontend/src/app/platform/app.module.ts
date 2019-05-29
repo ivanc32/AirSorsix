@@ -3,7 +3,6 @@ import { CreateDataLocationComponent } from '../components/create-data-location/
 import { CreateDataPlaneComponent } from '../components/create-data-plane/create-data-plane.component';
 import { CreateDataFlightComponent } from '../components/create-data-flight/create-data-flight.component';
 import { AuthenticationService } from '../service/authentication.service';
-import { AuthGuard } from '../service/auth-guard.service';
 import { LoginComponent } from '../components/login/login.component';
 import { ReserveFlightComponent } from '../components/reserve-flight/reserve-flight.component';
 import { FlightInfoComponent } from '../components/flight-info/flight-info.component';
@@ -20,6 +19,9 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
 import { FlightSearchComponent } from '../components/flight-search/flight-search.component';
 import { SearchDetailsComponent } from '../components/search-details/search-details.component';
 import { RegisterComponent } from '../components/register/register.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthGuard } from '../service/auth-guard.service';
+import { FooterComponent } from '../components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { RegisterComponent } from '../components/register/register.component';
     LoginComponent,
     ReserveFlightComponent,
     FlightInfoComponent,
-    RegisterComponent
+    RegisterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { RegisterComponent } from '../components/register/register.component';
   ],
   providers: [
     AuthenticationService,
-    AuthGuard
+    AuthGuard,
+    CookieService
 ],
   bootstrap: [AppComponent]
 })

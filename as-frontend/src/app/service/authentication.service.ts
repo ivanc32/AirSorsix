@@ -1,47 +1,62 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { User } from 'src/model/User';
-import { map } from 'rxjs/operators';
-import { LoginResponse } from 'src/model/LoginResponse';
+import { catchError, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
+
 
 @Injectable()
 export class AuthenticationService {
-
   isAuthenticated = Observable.create();
-  user: Observable<{}>;
+  user: Observable<User>;
   redirectUrl: string;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
-  getUser(): Observable<{}> {
-    if (this.user == null) {
-      this.user = this.http.get('localhost:8080/api/user');
-      return this.user;
-    }
-  }
+  login(username: string, password: string): Observable<User> {
+      const credentials = btoa(username + ':' + password);
+      const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest'
+      });
 
-  public logIn(user: User) {
-    const base64Credential: string = btoa(user.username + ':' + user.password);
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${base64Credential}`
-    });
-    const options = {headers};
-    return this.http.get('/api/login', options)
-    .pipe(
-        map((response: LoginResponse) => {
-          const loggedInUser = response.principal;
-          if (loggedInUser) {
-            localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-            //console.log(localStorage.getItem('currentUser'));
-          } else {
-            console.log('BELJAA');
-          }
-        })
+      return this.http.get<User>('/api/login', {headers}).pipe(
+          map(value => {
+              this.isAuthenticated = true;
+              console.log(this.isAuthenticated);
+              return value;
+          }),
+          catchError(() => {
+              this.isAuthenticated = false;
+              console.log(this.isAuthenticated);
+              return of(null);
+          })
       );
   }
 
+  logout(): Observable<boolean> {
+      return this.http.get<boolean>('/api/logout').pipe(
+          map(value => {
+              this.isAuthenticated = false;
+              return value;
+          })
+      );
+  }
+
+  isLoggedIn(): Observable<boolean> {
+          this.http.get('/api/user/logged').pipe(
+                map(value => {
+                  this.isAuthenticated = true;
+                  return value;
+              }),
+              catchError(() => {
+                  this.isAuthenticated = false;
+                  return of(null);
+              }));
+          return this.isAuthenticated;
+  }
 
 }

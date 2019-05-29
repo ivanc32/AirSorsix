@@ -7,9 +7,10 @@ class CreateUserRequest (
         @NotNull
         val username: String,
 
-        @NotNull
         @Length(min = 7, max = 30)
         val password: String,
+
+        val provider: String = "",
 
         val role: String = "USER"
 )

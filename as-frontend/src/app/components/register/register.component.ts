@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {RegisterService} from 'src/app/service/register.service';
 import {User} from 'src/model/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,25 +17,27 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl('')
   });
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) {
+  constructor(private formBuilder: FormBuilder, private registerService: RegisterService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
-      user: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
-    });
+      user: ['', Validators.compose([Validators.minLength(7), Validators.maxLength(20)])],
+      password: ['', Validators.compose([Validators.minLength(7), Validators.maxLength(30)])],
+      confirmPassword: ['']
+    }, {validator: this.checkPasswords});
+  }
+
+  checkPasswords(group: FormGroup) {
+  return group.controls.password.value === group.controls.confirmPassword.value ? null : { notSame: true };
   }
 
   register() {
     this.registerService.registerUser({
       username: this.registrationForm.get('user').value,
       password: this.registrationForm.get('password').value,
-      role: 'USER'
-    } as User).subscribe(user =>
-      console.log(user)
-    );
+      role: 'USER'} as User).subscribe();
   }
 
 }

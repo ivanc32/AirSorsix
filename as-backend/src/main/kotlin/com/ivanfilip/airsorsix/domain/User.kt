@@ -21,24 +21,23 @@ data class User (
         @Column(name = "password")
         private val password: String = "",
 
-        @Column(name = "role", unique = true)
+        @Column(name = "role")
         val role: String = "USER",
 
         @Column(name = "provider")
         val provider: String = ""
 
-        //isEnabled
 ) : UserDetails {
     override fun getAuthorities(): Collection<GrantedAuthority> =
             arrayListOf(role).map { SimpleGrantedAuthority(it) }
 
     override fun isEnabled(): Boolean = true
 
-    override fun getUsername(): String? = username
+    override fun getUsername(): String = username
 
     override fun isCredentialsNonExpired(): Boolean = true
 
-    override fun getPassword(): String? = password
+    override fun getPassword(): String = password
 
     override fun isAccountNonExpired(): Boolean = true
 
