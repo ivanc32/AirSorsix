@@ -19,7 +19,6 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
 import { FlightSearchComponent } from '../components/flight-search/flight-search.component';
 import { SearchDetailsComponent } from '../components/search-details/search-details.component';
 import { RegisterComponent } from '../components/register/register.component';
-import { CookieService } from 'ngx-cookie-service';
 import { AuthGuard } from '../service/auth-guard.service';
 import { FooterComponent } from '../components/footer/footer.component';
 
@@ -51,8 +50,7 @@ import { FooterComponent } from '../components/footer/footer.component';
   ],
   providers: [
     AuthenticationService,
-    AuthGuard,
-    CookieService
+    AuthGuard
 ],
   bootstrap: [AppComponent]
 })

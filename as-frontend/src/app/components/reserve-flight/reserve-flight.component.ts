@@ -21,8 +21,8 @@ export class ReserveFlightComponent implements OnInit {
   returnFlightEconomySeats = 0;
   returnFlightBusinessSeats = 0;
 
-  constructor(private route: ActivatedRoute, private reservationService: ReservationService
-    , private router: Router, private userService: UserService) {
+  constructor(private route: ActivatedRoute, private reservationService: ReservationService,
+              private router: Router, private userService: UserService) {
   }
 
   ngOnInit() {

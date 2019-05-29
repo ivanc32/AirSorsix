@@ -90,5 +90,10 @@ export class SearchDetailsComponent implements OnInit {
       this.router.navigateByUrl(`/reserve?flight=${goToFlight.id}&flight=${returnFlight.id}`);
     }
   }
+
+  getTimeString(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toTimeString();
+  }
 }
 

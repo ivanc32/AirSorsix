@@ -1,29 +1,94 @@
-<div class="container scroll mt-5 pt-2">
+<div class="container mt-3 mb-5">
+  <p class="outer-text">Please choose your flights</p>
   <div class="list-group" *ngIf="flights && !returnFlights; else both">
-    <h3>{{originLocation.city}} -----> {{destinationLocation.city}}</h3>
-    <div class="list-group-item bg-success" (click)="chosenGoFlight = flight" *ngFor="let flight of flights">
-        {{ flight.code }}
+    <p class="outer-text bg-cornflower-dark w-50 text-center list-group-border">{{originLocation.city}} ---> {{destinationLocation.city}}
+      ({{dateF.toDateString()}})</p>
+    <div class="list-group-item list-group-border bg-cornflower-dark flight-hover flight-item-color" (click)="chosenGoFlight = flight"
+         *ngFor="let flight of flights">
+      <div class="d-flex">
+        <div class="col-6">
+          <p>Departing from {{flight.departureLocation.airport}} at
+            <b>{{getTimeString(flight.departureDateTime.toString()).substring(0, 8)}}</b></p>
+          <p>Arriving at {{flight.arrivalLocation.airport}} at
+            <b>{{getTimeString(flight.arrivalDateTime.toString()).substring(0, 8)}}</b></p>
+          <p>Code: {{flight.code}}</p>
+        </div>
+        <div class="col-3">
+          <p>Plane information:</p>
+          <p>Number of total business seats: {{flight.plane.businessSeats}}</p>
+        </div>
+        <div class="col-3">
+          <p>{{flight.plane.manufacturer}}  {{flight.plane.model}}</p>
+          <p>Number of total economy seats: {{flight.plane.economySeats}}</p>
+        </div>
+      </div>
     </div>
-    <button [disabled]="!chosenGoFlight" (click)="goToReservation(chosenGoFlight, null)">BOOK!</button>
+    <p class="outer-text bg-cornflower-dark w-50 text-center list-group-border mt-2" *ngIf="chosenGoFlight">You selected the flight with code {{chosenGoFlight.code}}</p>
+    <div class="text-center">
+      <button class="sorsix-button mt-2" [disabled]="!chosenGoFlight" (click)="goToReservation(chosenGoFlight, null)">BOOK!
+      </button>
+    </div>
   </div>
 
   <ng-template #both>
     <div *ngIf="flights && returnFlights">
-      <h3>{{originLocation.city}} -----> {{destinationLocation.city}}</h3>
-      <div class="list-group" *ngFor="let flight of flights">
-        <div class="list-group-item bg-success" (click)="chosenGoFlight = flight">
-          {{ flight.code }}
+      <p class="outer-text bg-cornflower-dark w-50 text-center list-group-border">{{originLocation.city}}
+        -----> {{destinationLocation.city}}</p>
+      <div class="list-group list-group-border" *ngFor="let flight of flights">
+        <div class="list-group-item bg-cornflower-dark flight-hover flight-item-color" (click)="chosenGoFlight = flight"
+             *ngFor="let flight of flights">
+          <div class="d-flex">
+            <div class="col-6">
+              <p>Departing from {{flight.departureLocation.airport}} at
+                <b>{{getTimeString(flight.departureDateTime.toString()).substring(0, 8)}}</b></p>
+              <p>Arriving at {{flight.arrivalLocation.airport}} at
+                <b>{{getTimeString(flight.arrivalDateTime.toString()).substring(0, 8)}}</b></p>
+              <p>Code: {{flight.code}}</p>
+            </div>
+            <div class="col-3">
+              <p>Plane information:</p>
+              <p>Number of total business seats: {{flight.plane.businessSeats}}</p>
+            </div>
+            <div class="col-3">
+              <p>{{flight.plane.manufacturer}}  {{flight.plane.model}}</p>
+              <p>Number of total economy seats: {{flight.plane.economySeats}}</p>
+            </div>
+          </div>
         </div>
       </div>
-      <h3>{{destinationLocation.city}} -----> {{originLocation.city}}</h3>
-      <div class="list-group" *ngFor="let flight of returnFlights">
-        <div class="list-group-item bg-success" (click)="chosenReturnFlight = flight">
-          {{ flight.code }}
+      <p class="outer-text bg-cornflower-dark w-50 text-center list-group-border mt-2" *ngIf="chosenGoFlight">You
+        selected the flight with code {{chosenGoFlight.code}}</p>
+      <p class="outer-text bg-cornflower-dark w-50 text-center list-group-border mt-3">{{destinationLocation.city}}
+        -----> {{originLocation.city}}</p>
+      <div class="list-group list-group-border" *ngFor="let flight of returnFlights">
+        <div class="list-group-item bg-cornflower-dark flight-hover flight-item-color"
+             (click)="chosenReturnFlight = flight" *ngFor="let flight of returnFlights">
+          <div class="d-flex">
+            <div class="col-6">
+              <p>Departing from {{flight.departureLocation.airport}} at
+                <b>{{getTimeString(flight.departureDateTime.toString()).substring(0, 8)}}</b></p>
+              <p>Arriving at {{flight.arrivalLocation.airport}} at
+                <b>{{getTimeString(flight.arrivalDateTime.toString()).substring(0, 8)}}</b></p>
+              <p>Code: {{flight.code}}</p>
+            </div>
+            <div class="col-3">
+              <p>Plane information:</p>
+              <p>Number of total business seats: {{flight.plane.businessSeats}}</p>
+            </div>
+            <div class="col-3">
+              <p>{{flight.plane.manufacturer}}  {{flight.plane.model}}</p>
+              <p>Number of total economy seats: {{flight.plane.economySeats}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <button [disabled]="!(chosenGoFlight && chosenReturnFlight)"
-            (click)="goToReservation(chosenGoFlight, chosenReturnFlight)">BOOK!
-    </button>
+    <p class="outer-text bg-cornflower-dark w-50 text-center list-group-border mt-2" *ngIf="chosenReturnFlight">You
+      selected the flight with code {{chosenReturnFlight.code}}</p>
+    <div class="text-center">
+      <button class="btn-lg sorsix-button mt-2" [disabled]="!(chosenGoFlight && chosenReturnFlight)"
+              (click)="goToReservation(chosenGoFlight, chosenReturnFlight)">BOOK!
+      </button>
+    </div>
   </ng-template>
 </div>

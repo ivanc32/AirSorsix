@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CreateDataComponent implements OnInit {
 
+  showComponent = 0;
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {

@@ -16,7 +16,6 @@ export class FlightInfoComponent implements OnInit {
   flight: Flight;
   takenEconomySeats: number;
   takenBusinessSeats: number;
-  priceOfEconomyTicket: number;
   economyTicketsToReserve = 0;
   businessTicketsToReserve = 0;
   @Output() emitEconomyTickets = new EventEmitter<number>();
