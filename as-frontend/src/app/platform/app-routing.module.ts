@@ -28,8 +28,7 @@ const routes: Route[] = [{
   canActivate: [AuthGuard]
 }, {
   path: 'login',
-  component: LoginComponent,
-  canActivate: [AuthGuard]
+  component: LoginComponent
 }, {
   path: 'register',
   component: RegisterComponent

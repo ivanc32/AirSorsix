@@ -4,9 +4,13 @@ footer {
   background-color: #293c46;
   bottom: 0;
   width: 100%;
+  height: 13%;
   position: absolute;
+  padding: 0;
 }
 
 img {
-  width: 5%
+  width: 5%;
+  padding: 0;
+  margin: 0;
 }

@@ -2,9 +2,9 @@
   <a routerLink="/home" routerLinkActive="active-link"><img alt="sorsix-logo" class="navbar-brand" id="logo" src="assets/img/logo_sorsix_final.png"></a>
   <ul class="navbar-nav ml-auto mr-lg-5">
     <li class="nav-item">
-      <a routerLink="/login" routerLinkActive="active-link"><button class="btn-lg btn-outline-primary">Login</button></a>
-      <a href="/api/logout"><button class="btn-lg btn-outline-primary">Logout</button></a>
-      <a routerLink="/create" routerLinkActive="active-link"><button class="btn-lg btn-outline-primary">Create Data</button></a>
+      <a *ngIf="!this.isAuthenticated" routerLink="/login" routerLinkActive="active-link"><button class="btn-lg btn-outline-primary">Login</button></a>
+      <a *ngIf="this.isAuthenticated" href="/api/logout"><button class="btn-lg btn-outline-primary">Logout</button></a>
+      <a *ngIf="this.isAuthenticated" routerLink="/create" routerLinkActive="active-link"><button class="btn-lg btn-outline-primary">Create Data</button></a>
     </li>
   </ul>
 </nav>

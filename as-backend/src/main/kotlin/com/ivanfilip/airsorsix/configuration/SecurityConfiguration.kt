@@ -46,7 +46,7 @@ class SecurityConfiguration (val userService: UserService,
                 .authenticationEntryPoint(authenticationEntryPoint())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/user/reserve/*").hasRole("USER")
+                .antMatchers("/api/user/*").hasRole("USER")
                 .antMatchers("/api/create/*").hasRole("ADMIN")
                 .antMatchers("/api/**").permitAll()
                 .anyRequest().fullyAuthenticated()

@@ -5,11 +5,6 @@ import { User } from 'src/model/User';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-  })
-};
 
 
 @Injectable()
@@ -31,10 +26,12 @@ export class AuthenticationService {
       return this.http.get<User>('/api/login', {headers}).pipe(
           map(value => {
               this.isAuthenticated = true;
+              console.log(this.isAuthenticated);
               return value;
           }),
           catchError(() => {
               this.isAuthenticated = false;
+              console.log(this.isAuthenticated);
               return of(null);
           })
       );
@@ -49,9 +46,8 @@ export class AuthenticationService {
       );
   }
 
-  getUser(): Observable<User> {
-      if (this.user == null) {
-          this.user = this.http.get('/api/user').pipe(
+  isLoggedIn(): Observable<boolean> {
+          this.http.get('/api/user/logged').pipe(
                 map(value => {
                   this.isAuthenticated = true;
                   return value;
@@ -60,8 +56,7 @@ export class AuthenticationService {
                   this.isAuthenticated = false;
                   return of(null);
               }));
-      }
-      return this.user;
+          return this.isAuthenticated;
   }
 
 }
