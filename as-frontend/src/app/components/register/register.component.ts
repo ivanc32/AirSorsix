@@ -17,7 +17,8 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl('')
   });
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService,
+  constructor(private formBuilder: FormBuilder,
+              private registerService: RegisterService,
               private router: Router) {
   }
 
@@ -37,7 +38,7 @@ export class RegisterComponent implements OnInit {
     this.registerService.registerUser({
       username: this.registrationForm.get('user').value,
       password: this.registrationForm.get('password').value,
-      role: 'USER'} as User).subscribe();
+      role: 'ROLE_USER'} as User).subscribe();
   }
 
 }

@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 
 @Repository
-interface FlightRepository : JpaRepository<Flight, String>{
+interface FlightRepository : JpaRepository<Flight, String> {
     @Query("SELECT DISTINCT f.departureLocation FROM Flight f")
     fun findAllDistinctDepartureLocations(): List<Location>?
 

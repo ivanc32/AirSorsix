@@ -1,5 +1,8 @@
+import { Principal } from './Principal';
+
 export interface User {
   username: string;
   password: string;
-  role: 'USER';
+  role: 'ROLE_USER';
+  principal: Principal;
 }

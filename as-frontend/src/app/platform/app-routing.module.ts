@@ -7,7 +7,6 @@ import {SearchDetailsComponent} from '../components/search-details/search-detail
 import {HomePageComponent} from '../components/home-page/home-page.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { AuthGuard } from '../service/auth-guard.service';
-import { CanActivate } from '@angular/router/src/utils/preactivation';
 
 const routes: Route[] = [{
   path: 'search?origin=:origin&destination=:destination&datefrom=:dateFrom&dateto=:dateto',
@@ -28,18 +27,16 @@ const routes: Route[] = [{
   canActivate: [AuthGuard]
 }, {
   path: 'login',
-  component: LoginComponent
+  component: LoginComponent, canActivate: [AuthGuard]
 }, {
   path: 'register',
   component: RegisterComponent
 }, {
   path: 'reserve?flight=:flight',
-  component: ReserveFlightComponent,
-  canActivate: [AuthGuard]
+  component: ReserveFlightComponent, canActivate: [AuthGuard]
 }, {
   path: 'reserve',
-  component: ReserveFlightComponent,
-  canActivate: [AuthGuard]
+  component: ReserveFlightComponent, canActivate: [AuthGuard]
 }];
 
 
@@ -50,6 +47,9 @@ const routes: Route[] = [{
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    AuthGuard
   ]
 })
 

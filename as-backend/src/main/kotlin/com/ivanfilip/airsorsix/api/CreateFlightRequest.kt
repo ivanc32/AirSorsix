@@ -3,7 +3,7 @@ package com.ivanfilip.airsorsix.api
 import org.springframework.format.annotation.DateTimeFormat
 import javax.validation.constraints.NotNull
 
-class CreateFlightRequest (
+class CreateFlightRequest(
         @NotNull
         val planeId: String,
 

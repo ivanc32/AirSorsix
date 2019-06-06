@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../../service/location.service';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Location } from 'src/model/Location';
 
 
 @Component({
@@ -19,7 +18,7 @@ export class CreateDataLocationComponent implements OnInit {
   });
 
   constructor(private locationService: LocationService,
-    private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.createLocationForm = this.formBuilder.group({

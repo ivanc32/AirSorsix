@@ -13,7 +13,6 @@ import javax.transaction.Transactional
 import java.time.format.DateTimeFormatter
 
 
-
 @Service
 class FlightService(val flightRepository: FlightRepository,
                     val locationRepository: LocationRepository,
@@ -21,21 +20,21 @@ class FlightService(val flightRepository: FlightRepository,
 
     val logger = loggerFor<FlightService>()
 
-    fun getDepartureLocations(origin: String? = ""): List<Location>?{
+    fun getDepartureLocations(origin: String? = ""): List<Location>? {
         logger.info("Getting departure locations by query [{}]", origin)
         return flightRepository
                 .findAllDistinctDepartureLocations()
                 ?.filter { it.city.startsWith(origin ?: "", ignoreCase = true) }
     }
 
-    fun getArrivalLocations(origin: String, destination: String?): List<Location>?{
+    fun getArrivalLocations(origin: String, destination: String?): List<Location>? {
         logger.info("Getting arrival locations by origin [{}] and query [{}]", origin, destination)
         return flightRepository
                 .findAllDistinctArrivalLocations(locationRepository.findLocationByAirport(origin))
                 ?.filter { it.city.startsWith(destination ?: "", ignoreCase = true) }
     }
 
-    fun getFlightsByLocation(origin: String, destination: String): List<Flight>?{
+    fun getFlightsByLocation(origin: String, destination: String): List<Flight>? {
         logger.info("Getting flights from origin [{}] and destination [{}]", origin, destination)
         return flightRepository
                 .findAllByDepartureLocationAndArrivalLocation(locationRepository.findLocationByAirport(origin),
@@ -51,14 +50,15 @@ class FlightService(val flightRepository: FlightRepository,
     fun addNewFlight(flightDto: CreateFlightRequest): List<Flight>? {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         val flights: MutableList<Flight> = mutableListOf()
-        for(i in 0..100) {
+        for (i in 0..100) {
             val flight = Flight(plane = planeRepository.findPlaneById(flightDto.planeId) ?: return null,
                     code = flightDto.code,
                     departureDateTime = LocalDateTime.parse(flightDto.departureDateTime, formatter)
                             .plusWeeks(i.toLong()),
                     arrivalDateTime = LocalDateTime.parse(flightDto.arrivalDateTime, formatter)
                             .plusWeeks(i.toLong()),
-                    departureLocation = locationRepository.findLocationById(flightDto.departureLocationId) ?: return null,
+                    departureLocation = locationRepository.findLocationById(flightDto.departureLocationId)
+                            ?: return null,
                     arrivalLocation = locationRepository.findLocationById(flightDto.arrivalLocationId) ?: return null)
             flights.add(flight)
             logger.info("Saving flight [{}]", flight)

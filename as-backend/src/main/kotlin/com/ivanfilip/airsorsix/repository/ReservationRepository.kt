@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ReservationRepository : JpaRepository<Reservation, String> {
-    fun findReservationsByFlight (flight: Flight?): List<Reservation>?
+    fun findReservationsByFlight(flight: Flight?): List<Reservation>?
 }

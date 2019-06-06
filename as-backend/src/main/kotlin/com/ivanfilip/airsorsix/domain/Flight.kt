@@ -41,4 +41,4 @@ data class Flight(
 
         @Column(name = "free_economy_seats")
         val economySeats: Int? = plane.economySeats
-        )
+)
