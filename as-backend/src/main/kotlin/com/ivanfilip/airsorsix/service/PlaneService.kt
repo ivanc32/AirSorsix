@@ -14,9 +14,9 @@ class PlaneService(val planeRepository: PlaneRepository) {
 
     @Transactional
     fun addNewPlane(planeDto: CreatePlaneRequest): Plane {
-        val plane = Plane(manufacturer =  planeDto.manufacturer,
+        val plane = Plane(manufacturer = planeDto.manufacturer,
                 model = planeDto.model,
-                economySeats =  planeDto.numberEconomySeat,
+                economySeats = planeDto.numberEconomySeat,
                 businessSeats = planeDto.numberBusinessSeat,
                 economyPrice = planeDto.priceEconomySeat,
                 businessPrice = planeDto.priceBusinessSeat)

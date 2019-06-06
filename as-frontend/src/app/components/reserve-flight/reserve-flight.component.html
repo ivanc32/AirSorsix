@@ -1,19 +1,19 @@
-<div class="d-flex container">
+<div class="d-flex container mt-4">
   <div class="col-lg-6" *ngIf="flight">
-    <h2>Initial flight:</h2>
+    <p class="outer-text">Initial flight:</p>
     <app-flight-info [flightId]='flight'
                      (emitEconomyTickets)="flightEconomySeats = $event"
                      (emitBusinessTickets)="flightBusinessSeats = $event">
     </app-flight-info>
   </div>
   <div class="col-lg-6" *ngIf="returnFlight">
-    <h2>Return flight:</h2>
-  <app-flight-info  [flightId]='returnFlight'
-                   (emitEconomyTickets)="returnFlightEconomySeats = $event"
-                   (emitBusinessTickets)="returnFlightBusinessSeats = $event">
-  </app-flight-info>
+    <p class="outer-text">Return flight:</p>
+    <app-flight-info [flightId]='returnFlight'
+                     (emitEconomyTickets)="returnFlightEconomySeats = $event"
+                     (emitBusinessTickets)="returnFlightBusinessSeats = $event">
+    </app-flight-info>
   </div>
 </div>
-<div class="text-center mt-3">
-  <button (click)="onPress()"><h2>Book</h2></button>
+<div class="text-center mt-5">
+  <button class="sorsix-button btn-lg" (click)="onPress()"><h2>Book</h2></button>
 </div>

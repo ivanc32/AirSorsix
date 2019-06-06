@@ -21,7 +21,7 @@ export class CreateDataFlightComponent implements OnInit {
   });
 
   constructor(private flightService: FlightService,
-    private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.createFlightForm = this.formBuilder.group({

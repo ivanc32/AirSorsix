@@ -36,7 +36,7 @@ export class ReservationService {
   }
 
   postReservation(reservation: Reservation) {
-    return this.postObject<Reservation>(`${api}/user/create/reservation`, reservation);
+    return this.postObject<Reservation>(`${api}/user/reservation`, reservation);
   }
 
   getReservationsByFlight(flightId: string): Observable<Reservation[]> {

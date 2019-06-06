@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-data',
@@ -8,9 +7,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CreateDataComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  showComponent = 0;
 
-  ngOnInit() {
-  }
+  constructor() { }
+
+  ngOnInit() {}
 
 }

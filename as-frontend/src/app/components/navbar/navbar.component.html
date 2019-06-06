@@ -1,10 +1,14 @@
 <nav class="navbar navbar-expand-lg">
   <a routerLink="/home" routerLinkActive="active-link"><img alt="sorsix-logo" class="navbar-brand" id="logo" src="assets/img/logo_sorsix_final.png"></a>
-  <ul class="navbar-nav ml-auto mr-lg-5">
-    <li class="nav-item">
-      <a *ngIf="!this.isAuthenticated" routerLink="/login" routerLinkActive="active-link"><button class="btn-lg btn-outline-primary">Login</button></a>
-      <a *ngIf="this.isAuthenticated" href="/api/logout"><button class="btn-lg btn-outline-primary">Logout</button></a>
-      <a *ngIf="this.isAuthenticated" routerLink="/create" routerLinkActive="active-link"><button class="btn-lg btn-outline-primary">Create Data</button></a>
-    </li>
-  </ul>
+  <div class="navbar-nav ml-auto mr-lg-5">
+    <div class="nav-item" *ngIf="!this.isAuthenticated">
+      <a  routerLink="/login" routerLinkActive="active-link"><button class="btn-lg btn-outline-primary">Login</button></a>
+    </div>
+    <div class="nav-item" *ngIf="this.isAuthenticated">
+      <a  href="/api/logout"><button class="btn-lg btn-outline-primary">Logout</button></a>
+    </div>
+    <div class="nav-item" *ngIf="this.isAuthenticated">
+    <a  routerLink="/create" routerLinkActive="active-link"><button class="btn-lg btn-outline-primary">Create Data</button></a>
+    </div>
+  </div>
 </nav>

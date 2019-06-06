@@ -1,8 +1,6 @@
 package com.ivanfilip.airsorsix.api
 
 import com.ivanfilip.airsorsix.api.exceptions.UsernameExistsException
-import com.ivanfilip.airsorsix.configuration.PasswordEncoderConfiguration
-import com.ivanfilip.airsorsix.configuration.SecurityConfiguration
 import com.ivanfilip.airsorsix.domain.Flight
 import com.ivanfilip.airsorsix.domain.Location
 import com.ivanfilip.airsorsix.domain.Reservation
@@ -11,23 +9,13 @@ import com.ivanfilip.airsorsix.service.FlightService
 import com.ivanfilip.airsorsix.service.LocationService
 import com.ivanfilip.airsorsix.service.ReservationService
 import com.ivanfilip.airsorsix.service.UserService
-import org.springframework.http.HttpRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 import javax.validation.Valid
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.web.context.SecurityContextPersistenceFilter
-import kotlin.math.log
 import org.springframework.web.bind.annotation.RequestMapping
-
-
 
 
 @RestController

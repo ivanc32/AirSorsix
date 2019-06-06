@@ -2,7 +2,7 @@ package com.ivanfilip.airsorsix.api
 
 import javax.validation.constraints.NotNull
 
-class CreateReservationRequest (
+class CreateReservationRequest(
         @NotNull
         val flightId: String,
 

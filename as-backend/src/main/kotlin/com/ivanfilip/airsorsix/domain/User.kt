@@ -8,7 +8,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users")
-data class User (
+data class User(
         @Id
         @GeneratedValue(generator = "uuid")
         @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -22,7 +22,7 @@ data class User (
         private val password: String = "",
 
         @Column(name = "role")
-        val role: String = "USER",
+        val role: String = "ROLE_USER",
 
         @Column(name = "provider")
         val provider: String = ""

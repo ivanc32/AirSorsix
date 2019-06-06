@@ -3,7 +3,7 @@ package com.ivanfilip.airsorsix.api
 import org.hibernate.validator.constraints.Length
 import javax.validation.constraints.NotNull
 
-class CreateUserRequest (
+class CreateUserRequest(
         @NotNull
         val username: String,
 
@@ -12,5 +12,5 @@ class CreateUserRequest (
 
         val provider: String = "",
 
-        val role: String = "USER"
+        val role: String = "ROLE_USER"
 )

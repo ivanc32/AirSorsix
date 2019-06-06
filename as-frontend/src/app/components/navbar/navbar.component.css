@@ -15,7 +15,6 @@ body {
 .navbar-nav {
   margin: 0%;
   width: 30%;
-
 }
 
 .nav-item {
@@ -23,9 +22,18 @@ body {
   float: right;
 }
 
-.btn-outline-primary {
+button {
   color: white;
   border-color: white;
   background-color: rgb(253, 22, 72);
   margin: 0% 1% 0 1% ;
+  justify-items: center;
+  align-items: center;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  border-color: white;
+  background-color: rgb(226, 0, 49);
 }

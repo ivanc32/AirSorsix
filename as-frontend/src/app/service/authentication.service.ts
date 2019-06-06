@@ -3,13 +3,11 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { User } from 'src/model/User';
 import { catchError, map } from 'rxjs/operators';
-import { Router } from '@angular/router';
-
 
 
 @Injectable()
 export class AuthenticationService {
-  isAuthenticated = Observable.create();
+  isAuthenticated = false;
   user: Observable<User>;
   redirectUrl: string;
 
@@ -25,13 +23,9 @@ export class AuthenticationService {
 
       return this.http.get<User>('/api/login', {headers}).pipe(
           map(value => {
-              this.isAuthenticated = true;
-              console.log(this.isAuthenticated);
               return value;
           }),
           catchError(() => {
-              this.isAuthenticated = false;
-              console.log(this.isAuthenticated);
               return of(null);
           })
       );
@@ -47,16 +41,17 @@ export class AuthenticationService {
   }
 
   isLoggedIn(): Observable<boolean> {
-          this.http.get('/api/user/logged').pipe(
+          return this.http.get('/api/user/logged').pipe(
                 map(value => {
+                  console.log("test");
                   this.isAuthenticated = true;
                   return value;
               }),
               catchError(() => {
+                  console.log("error");
                   this.isAuthenticated = false;
                   return of(null);
               }));
-          return this.isAuthenticated;
   }
 
 }

@@ -3,7 +3,6 @@ import {Flight} from 'src/model/Flight';
 import {FlightService} from '../../service/flight.service';
 import {ReservationService} from '../../service/reservation.service';
 import {forkJoin} from 'rxjs';
-import {Reservation} from 'src/model/Reservation';
 
 @Component({
   selector: 'app-flight-info',
@@ -35,7 +34,6 @@ export class FlightInfoComponent implements OnInit {
         this.takenBusinessSeats = reservations.reduce((sum, item) => sum + item.businessTickets, 0);
         this.takenEconomySeats = reservations.reduce((sum, item) => sum + item.economyTickets, 0);
       });
-
   }
 
   changeBusinessPlusMinusToggle(update: number) {

@@ -3,7 +3,7 @@ package com.ivanfilip.airsorsix.api
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotNull
 
-class   CreateLocationRequest(
+class CreateLocationRequest(
         @NotNull
         val city: String,
 

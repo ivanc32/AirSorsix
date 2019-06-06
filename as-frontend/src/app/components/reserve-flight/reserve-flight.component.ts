@@ -2,9 +2,7 @@ import {Component, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {ReservationService} from 'src/app/service/reservation.service';
-import {Reservation} from 'src/model/Reservation';
 import { UserService } from 'src/app/service/user.service';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-reserve-flight',
@@ -21,8 +19,10 @@ export class ReserveFlightComponent implements OnInit {
   returnFlightEconomySeats = 0;
   returnFlightBusinessSeats = 0;
 
-  constructor(private route: ActivatedRoute, private reservationService: ReservationService
-    , private router: Router, private userService: UserService) {
+  constructor(private route: ActivatedRoute,
+              private reservationService: ReservationService,
+              private router: Router,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class ReserveFlightComponent implements OnInit {
       this.returnFlight = params[1];
       console.log(params);
     });
-    this.userService.getUser().subscribe(user => this.userId = user['principal']['id'])
+    this.userService.getUser().subscribe(user => this.userId = user.principal.id);
   }
 
   onPress() {

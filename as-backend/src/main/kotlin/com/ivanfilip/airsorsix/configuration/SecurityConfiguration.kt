@@ -1,9 +1,7 @@
 package com.ivanfilip.airsorsix.configuration
 
 import com.ivanfilip.airsorsix.repository.UserRepository
-import com.ivanfilip.airsorsix.service.LocationService
 import com.ivanfilip.airsorsix.service.UserService
-import com.ivanfilip.airsorsix.utills.loggerFor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -11,24 +9,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.web.AuthenticationEntryPoint
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import javax.servlet.http.HttpServletResponse
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.core.userdetails.UserDetails
 
-
-// import org.springframework.session.web.http.CookieSerializer
-// import org.springframework.session.web.http.DefaultCookieSerializer
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfiguration (val userService: UserService,
-                             val encoder: PasswordEncoderConfiguration,
-                             val userRepository: UserRepository) : WebSecurityConfigurerAdapter() {
-
-    val logger = loggerFor<SecurityConfiguration>()
+class SecurityConfiguration(val userService: UserService,
+                            val encoder: PasswordEncoderConfiguration,
+                            val userRepository: UserRepository) : WebSecurityConfigurerAdapter() {
 
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(userService)

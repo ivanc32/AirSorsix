@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Principal } from 'src/model/Principal';
+import { User } from 'src/model/User';
 
 const api = '/api';
 
@@ -35,7 +36,7 @@ export class UserService {
     };
   }
 
-  getUser(): Observable<Principal> {
-    return this.getObject<Principal>(`${api}/principal`);
+  getUser(): Observable<User> {
+    return this.getObject<User>(`${api}/principal`);
   }
 }

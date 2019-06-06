@@ -3,6 +3,14 @@
   overflow-y: auto;
 }
 
+.calendar-button{
+  color: white;
+  border-color: white;
+  background-color: rgb(253, 22, 72);
+  margin: 0% 1% 0 1% ;
+}
+
+
 .item-text{
  font-size: 19px;
  color: black;
@@ -13,11 +21,11 @@
 }
 
 .bg-cornflower{
- background-color: cornflowerblue;
+ background-color: #293c46;
 }
 
 .bg-cornflower-dark{
- background-color: #3a5383;
+ background-color: #293c46;
 }
 
 .form-plate{
@@ -93,4 +101,12 @@
  -webkit-transform: rotate(45deg);
  -ms-transform: rotate(45deg);
  transform: rotate(45deg);
+}
+
+b, h4, .item-text {
+  color: white;
+}
+
+.d-flex {
+  align-content: center;
 }

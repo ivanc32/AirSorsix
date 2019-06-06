@@ -1,28 +1,30 @@
-<div *ngIf="flight">
+<div class="bg-cornflower form-plate p-2 inner-text" *ngIf="flight">
 
   <div>
-    <h3>Economy</h3>
+    <h3><b>Economy class</b></h3>
 
-    <label>Free Seats: {{flight.plane.economySeats - takenEconomySeats}}</label>
+    <p>Free Seats: {{flight.plane.economySeats - takenEconomySeats}}</p>
 
-    <label>Number of tickets</label>
-    <input type="text" value="{{economyTicketsToReserve}}">
-    <button (click)="changeEconomyPlusMinusToggle(1)">+</button>
+    <p>Price for an Economy ticket {{flight.arrivalLocation.price + flight.plane.economyPrice}}</p>
+
+    <label class="pr-3">Number of tickets: </label>
     <button (click)="changeEconomyPlusMinusToggle(-1)">-</button>
+    <input class="ticket-input-w" type="text" value="{{economyTicketsToReserve}}">
+    <button (click)="changeEconomyPlusMinusToggle(1)">+</button>
 
-    <label>Price for an Economy ticket {{flight.arrivalLocation.price + flight.plane.economyPrice}}</label>
   </div>
 
   <div *ngIf="flight.plane.businessSeats > 0">
-    <h3>Business</h3>
+    <h3><b>Business class</b></h3>
 
-    <label>Free Seats: {{flight.plane.businessSeats - takenBusinessSeats}}</label>
+    <p>Free Seats: {{flight.plane.businessSeats - takenBusinessSeats}}</p>
 
-    <label>Number of tickets</label>
-    <input type="text" value="{{businessTicketsToReserve}}">
-    <button (click)="changeBusinessPlusMinusToggle(1)">+</button>
+    <p>Price for a Business ticket {{flight.arrivalLocation.price + flight.plane.businessPrice}}</p>
+
+    <label class="pr-3">Number of tickets: </label>
     <button (click)="changeBusinessPlusMinusToggle(-1)">-</button>
+    <input class="ticket-input-w" type="text" value="{{businessTicketsToReserve}}">
+    <button (click)="changeBusinessPlusMinusToggle(1)">+</button>
 
-    <label>Price for a Business ticket {{flight.arrivalLocation.price + flight.plane.businessPrice}}</label>
   </div>
 </div>

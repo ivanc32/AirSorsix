@@ -1,4 +1,54 @@
-.scroll{
+.scroll {
   max-height: 600px;
   overflow-y: auto;
 }
+
+.location-text {
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: 30px;
+  letter-spacing: 1.8px;
+  word-spacing: 2px;
+  color: white;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+}
+
+.bg-cornflower-dark {
+  background-color: #293c46;
+}
+
+.flight-hover:hover {
+  background-color: #3E7F8F;
+  cursor: pointer;
+}
+
+.flight-item-color {
+  color: white;
+}
+
+
+.list-group-border{
+  border: 2px solid white;
+}
+
+.outer-text{
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: #FFFFFF;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+}
+
+.sorsix-button{
+  width: 25%;
+  height: 15%;
+}
+

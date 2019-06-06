@@ -8,22 +8,14 @@ import com.ivanfilip.airsorsix.utills.loggerFor
 import org.springframework.stereotype.Service
 
 @Service
-class ReservationService (val reservationRepository: ReservationRepository,
-                          val userRepository: UserRepository,
-                          val flightRepository: FlightRepository) {
+class ReservationService(val reservationRepository: ReservationRepository,
+                         val userRepository: UserRepository,
+                         val flightRepository: FlightRepository) {
 
     val logger = loggerFor<ReservationService>()
 
-    /*fun addNewReservation(userId: String, flightId: String, seatType: SeatType): Reservation? {
-        val reservation = Reservation(flight = flightRepository.findFlightById(flightId) ?: return null,
-                user = userRepository.findUserById(userId) ?: return null,seatType =  seatType)
-        logger.info("Saving reservation [{}]", reservation)
-        reservationRepository.save(reservation)
-        return reservation
-    }*/
-
     fun addNewReservation(flightId: String, userId: String,
-                           economyTickets: Int, businessTicket: Int): Reservation? {
+                          economyTickets: Int, businessTicket: Int): Reservation? {
         val reservation = Reservation(user = userRepository.findUserById(userId) ?: return null,
                 flight = flightRepository.findFlightById(flightId) ?: return null,
                 economyTickets = economyTickets,
@@ -34,6 +26,7 @@ class ReservationService (val reservationRepository: ReservationRepository,
     }
 
     fun findReservationsByFlight(flightId: String): List<Reservation>? {
+        logger.info("find reservations for flight with id [{}]", flightId)
         return reservationRepository.findReservationsByFlight(flightRepository.findFlightById(flightId))
     }
 }

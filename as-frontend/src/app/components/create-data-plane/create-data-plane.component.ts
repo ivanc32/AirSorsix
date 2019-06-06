@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaneService } from '../../service/plane.service';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Plane } from 'src/model/Plane';
 
 @Component({
   selector: 'app-create-data-plane',
@@ -20,7 +19,7 @@ export class CreateDataPlaneComponent implements OnInit {
   });
 
   constructor(private planeService: PlaneService,
-    private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.createPlaneForm = this.formBuilder.group({
